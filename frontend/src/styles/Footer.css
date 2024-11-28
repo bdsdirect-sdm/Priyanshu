@@ -1,0 +1,24 @@
+/* Footer styling */
+.footer {
+    width: 100%;
+    background-color: #f8f9fa;
+    /* Light gray background to distinguish it from the main content */
+    text-align: center;
+    position: fixed;
+    /* Ensures the footer stays at the bottom */
+    bottom: 0;
+    padding: 10px 0;
+    border-top: 1px solid #e0e0e0;
+    /* Subtle top border for separation */
+    font-size: 0.9rem;
+    color: #333;
+    /* Dark text color for readability */
+    z-index: 1000;
+    /* Ensures it overlays other content */
+}
+
+/* Footer text styling */
+.footer-text {
+    margin: 0;
+    font-weight: 500;
+}

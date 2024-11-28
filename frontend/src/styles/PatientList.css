@@ -1,0 +1,86 @@
+.patient-list-container {
+    margin-left: 250px;
+    padding: 20px;
+    background: #ecf1f3;
+    /* height: calc(100vh - 60px); */
+    margin-top: -19px;
+    overflow-y: auto;
+}
+
+.table {
+    width: 100%;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.table th,
+.table td {
+    text-align: center;
+    padding: 12px 20px;
+}
+
+.table th {
+    background-color: #ffffff;
+    color: #232323;
+    font-weight: bold;
+}
+
+.table td {
+    background-color: #f9f9f9;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+.table tbody tr:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+}
+
+.spinner-border {
+    margin: 20px auto;
+    display: block;
+}
+
+.heading-patient {
+    /* font-size: var(--heading-size); */
+    color: var(--heading-color);
+    font-size: 2rem;
+}
+
+/* Styling for the search input */
+.search-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    width: 100%;
+    max-width: 400px;
+}
+
+.search-button {
+    cursor: pointer;
+    background-color: #35C0E4;
+    color: #fff;
+    width: fit-content;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: 0.5s;
+}
+
+.search-button:hover {
+    background-color: #2a99b6;
+}

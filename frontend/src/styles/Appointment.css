@@ -1,0 +1,70 @@
+.add-patient-container {
+    background: var(--light-color);
+    padding: 20px 33px;
+    border-radius: 4px;
+    background-color: #ecf1f3;
+
+}
+
+.form-title {
+    margin-bottom: 20px;
+}
+
+.form-action {
+    display: flex;
+    gap: 20px;
+}
+
+.icon-back {
+    padding: 0px 0px 5px;
+}
+
+.appointment-form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    background-color: #fff;
+    padding: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.form-group select,
+.form-group input {
+    padding: 8px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+}
+
+button {
+    grid-column: span 3;
+    /* Make the button span across all columns */
+    padding: 10px 20px;
+    background-color: #35C0E4;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+.btn-submit {
+    background-color: #35C0E4;
+    color: #fff;
+    width: fit-content;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: 0.5s;
+}

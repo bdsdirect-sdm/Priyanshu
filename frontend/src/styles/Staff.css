@@ -1,0 +1,203 @@
+/* Staff Form Container */
+.staff-form-container {
+    max-width: 75%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-left: 282px;
+    margin-bottom: 2%;
+}
+
+/* Dashboard Heading */
+.heading-dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.heading-dashboard h3 {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Form Styles */
+.staff-form {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.staff-form .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+input,
+select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+}
+
+input:focus,
+select:focus {
+    border-color: #17a2b8;
+    outline: none;
+}
+
+.staff-form .btn {
+    grid-column: span 2;
+    background-color: #17a2b8;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.staff-form .btn:hover {
+    background-color: #138f9a;
+}
+
+/* Search and Button Containers */
+.search-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-container .form-control {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-color {
+    background-color: #17a2b8;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-color:hover {
+    background-color: #138f9a;
+}
+
+.btn-search {
+    background-color: #17a2b8;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-search:hover {
+    background-color: #138f9a;
+}
+
+/* Staff List */
+.staff-list {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.staff-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.staff-table thead {
+    /* background-color: #17a2b8; */
+    color: rgb(5, 5, 5);
+}
+
+.staff-table th,
+.staff-table td {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.staff-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333;
+}
+
+.modal-content .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.modal-content .close:hover {
+    color: #17a2b8;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .staff-form {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-table th,
+    .staff-table td {
+        font-size: 0.9rem;
+    }
+
+    .staff-form .btn {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,180 @@
+/* Wrapper for the entire signup section */
+.signup-wrapper {
+    display: flex;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+
+}
+
+
+/* Left side with image */
+.left-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background: linear-gradient(to bottom right, #00c6ff, #0072ff); */
+    background: rgb(67, 231, 157);
+    background: linear-gradient(90deg, rgba(67, 231, 157, 1) 35%, rgba(53, 192, 228, 1) 100%);
+}
+
+.signup-image {
+    max-width: 80%;
+    height: auto;
+}
+
+/* Right side with form */
+.right-side {
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f9f9f9;
+}
+
+.signup-heading {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #080808;
+    margin-bottom: 20px;
+}
+
+/* Form styles */
+.signup-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    /* Border for the signup form */
+    border-radius: 8px;
+    /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    background-color: #fafafa;
+    /* Slight background color for the form */
+    padding: 35px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: #0072ff;
+    box-shadow: 0 0 5px rgba(0, 114, 255, 0.5);
+}
+
+/* Error message styling */
+.text-danger {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 5px;
+}
+
+/* Submit button */
+.btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #0072ff;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background: #2a99b6;
+}
+
+/* Login link */
+.login-link {
+    color: #0072ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .signup-wrapper {
+        flex-direction: column;
+    }
+
+    .left-side {
+        display: none;
+    }
+
+    .right-side {
+        padding: 30px;
+    }
+}
+
+/* Center the login redirect text */
+.login-redirect {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Style for the login link */
+.login-link {
+    color: #0072ff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+/* Add these styles for the footer */
+.footer {
+    background-color: #232A2E;
+    ;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}

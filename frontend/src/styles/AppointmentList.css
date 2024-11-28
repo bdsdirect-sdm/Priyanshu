@@ -1,0 +1,8 @@
+.appointments-list-container {
+    margin-left: 250px;
+    padding: 20px;
+    background: #ecf1f3;
+    /* height: calc(100vh - 60px); */
+    margin-top: -19px;
+    overflow-y: auto;
+}

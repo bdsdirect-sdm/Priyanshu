@@ -1,0 +1,83 @@
+.verify-container {
+    display: flex;
+    height: 100vh;
+}
+
+.verify-left,
+.verify-right {
+    width: 50%;
+    padding: 20px;
+}
+
+.verify-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(67, 231, 157);
+    background: linear-gradient(90deg, rgba(67, 231, 157, 1) 35%, rgba(53, 192, 228, 1) 100%);
+    /* Blue background for the left side */
+    color: white;
+}
+
+.verify-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    /* Light background for the OTP side */
+}
+
+.verify-form {
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-group label {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.text-danger {
+    color: red;
+}
+
+.eye-refer {
+    text-align: center;
+}
+
+.eye-refer h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.eye-refer p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.eye-refer-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+}
+
+.verify-heading {
+    text-align: center;
+}
