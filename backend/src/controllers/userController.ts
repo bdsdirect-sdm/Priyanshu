@@ -121,7 +121,6 @@ export const getDoctorList = async (req: any, res: Response) => {
     try {
         const { uuid } = req.user;
 
-        console.log("User UUID:", req.user);
 
         const user = await User.findOne({ where: { uuid: uuid }, include: Address });
 
@@ -164,7 +163,6 @@ export const getDoctorList = async (req: any, res: Response) => {
 };
 export const getDocList = async (req: any, res: Response) => {
     try {
-        console.log("11111111111111");
         const { uuid } = req.user;
         const user = await User.findOne({ where: { uuid: uuid } })
         let docList;
@@ -220,8 +218,7 @@ export const getPatientList = async (req: any, res: Response) => {
                     plist.push(newPatientList);
                 }
 
-                console.log("Data----->", plist);
-                res.status(200).json({ "patientList": plist, "message": "Patient List Found" });
+                res.status(200).json({ "patientList": plist, "user": user, "message": "Patient List Found" });
             }
             else {
                 res.status(404).json({ "message": "Patient List Not Found" });
@@ -292,7 +289,7 @@ export const getPatientList = async (req: any, res: Response) => {
 //                     plist.push(newPatientList);
 //                 }
 
-//                 console.log("Data----->", plist);
+//                 
 //                 res.status(200).json({ "patientList": plist, "message": "Patient List Found" });
 //             } else {
 //                 res.status(404).json({ "message": "No Patients Found Matching Criteria" });
@@ -372,7 +369,7 @@ export const addAddress = async (req: any, res: Response) => {
         const user = await User.findOne({ where: { uuid: uuid } });
         if (user) {
             const { street, district, city, state, pincode, phone } = req.body;
-            console.log("aaaahhhhhh", uuid);
+
             const address = await Address.create({ street, district, city, state, pincode, phone, user: uuid });
             if (address) {
                 res.status(200).json({ "message": "Address added Successfully" });
@@ -437,7 +434,6 @@ export const updateprofile = async (req: any, res: any) => {
 export const deleteAddress = async (req: any, res: any) => {
     try {
         const { uuid } = req.user;
-        console.log("<><<<<<<<<<<", uuid);
 
         const { addressUuid } = req.params;
 

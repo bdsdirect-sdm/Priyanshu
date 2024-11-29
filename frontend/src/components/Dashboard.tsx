@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Local } from '../environment/env';
 import api from '../api/axiosInstance';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import '../styles/Dashboard.css';
 
@@ -12,7 +12,19 @@ const Dashboard: React.FC = () => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = 3;
-
+    const directChat = (patient: any, user1: any, user2: any, user: any, firstname: any, lastname: any) => {
+        const chatdata = {
+            patient: patient,
+            user1: user1,
+            user2: user2,
+            user: user,
+            roomname: `${firstname} ${lastname}`
+        };
+        localStorage.setItem("pname", chatdata.roomname);
+        localStorage.setItem('chatdata', JSON.stringify(chatdata));
+        navigate('/chat')
+        return;
+    }
     useEffect(() => {
         if (!token) {
             navigate("/login");
@@ -39,12 +51,13 @@ const Dashboard: React.FC = () => {
                     Authorization: `Bearer ${token}`
                 }
             });
-            console.log("HUHU", response);
+            // console.log("HUHU", response);
             return response.data || '';
         } catch (err) {
             toast.error("Failed to fetch patient data");
         }
     };
+
 
     const fetchDoctorList = async () => {
         try {
@@ -152,6 +165,7 @@ const Dashboard: React.FC = () => {
                                 <th scope="col">Refer to</th>
                                 <th scope="col">Refer back</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Direct Message</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -165,6 +179,9 @@ const Dashboard: React.FC = () => {
                                     <td>
                                         <span className="status-color">{patient?.referalstatus ? 'Completed' : 'Pending'}</span>
                                     </td>
+                                    <td> <p className='text-primary text-decoration-underline chng-pointer' onClick={() => {
+                                        directChat(patient.uuid, patient.referedby.uuid, patient.referedto.uuid, patientData?.user.uuid, patient.firstname, patient.lastname);
+                                    }} >Link</p> </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -173,19 +190,17 @@ const Dashboard: React.FC = () => {
             </div>
 
             <div className="pagination-container">
-                <button
-                    onClick={() => handlePageChange(currentPage - 1)}
-                >
-                    Previous
-                </button>
-                <div className='counting'>{` ${currentPage} / ${totalPages}`}</div>
-                <button
-                    onClick={() => handlePageChange(currentPage + 1)}
-
-                >
-                    Next
-                </button>
+                {Array.from({ length: totalPages }, (_, index) => (
+                    <button
+                        key={index}
+                        className={`page-number ${currentPage === index + 1 ? 'active' : ''}`}
+                        onClick={() => handlePageChange(index + 1)}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
             </div>
+
         </div>
     );
 };

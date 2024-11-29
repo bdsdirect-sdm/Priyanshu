@@ -35,10 +35,13 @@ const Header: React.FC = () => {
           <div className="user-actions">
             {token ? (
               <div className="dropdown">
-                <button className="dropdown" aria-expanded="false">
+                {/* <button className="dropdown" aria-expanded="false"> */}
+                <img src="1731913305884_d922de70ff66.jpg" className="profile-icon" height="40" width="40"></img>
+                <div className='profile-content'>
                   <h4 className='profile-name'>Hi, {fullName} {lastName} </h4>
-                  <p>Welcome Back</p><br />
-                </button>
+                  <p>Welcome Back</p>
+                </div>
+                {/* </button> */}
                 <ul className="dropdown-menu">
                   <li><Link to="/profile" className="dropdown-item">Profile</Link></li>
                   <li><Link to="/update-password" className="dropdown-item">Change Password</Link></li>
@@ -60,11 +63,11 @@ const Header: React.FC = () => {
 
       {token && (
         <div className={`sidebar ${isSidebarExpanded ? 'expanded' : 'collapsed'}`}>
-          <div className="sidebar-header">
+          {/* <div className="sidebar-header">
             <button className="sidebar-toggle" onClick={() => setIsSidebarExpanded(!isSidebarExpanded)}>
               <HiOutlineMenu className="icon" />
             </button>
-          </div>
+          </div> */}
 
           <nav className="nav-links">
             <Link to="/dashboard" className="nav-link">

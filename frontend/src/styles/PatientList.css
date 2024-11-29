@@ -1,6 +1,6 @@
 .patient-list-container {
     margin-left: 250px;
-    padding: 20px;
+    padding: 35px;
     background: #ecf1f3;
     /* height: calc(100vh - 60px); */
     margin-top: -19px;
@@ -54,16 +54,14 @@
 /* Styling for the search input */
 .search-container {
     display: flex;
-    gap: 10px;
+    gap: 1rem;
+    align-items: center;
+    padding: 10px;
     margin-bottom: 20px;
+    border-radius: 5px;
 }
 
 .search-input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    outline: none;
     width: 100%;
     max-width: 400px;
 }
@@ -72,15 +70,18 @@
     cursor: pointer;
     background-color: #35C0E4;
     color: #fff;
-    width: fit-content;
-    padding: 14px 20px;
-    border: none;
-    border-radius: 4px;
     font-weight: 600;
     font-size: 16px;
-    transition: 0.5s;
+
 }
 
 .search-button:hover {
     background-color: #2a99b6;
+}
+
+.header-container-patientlist {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

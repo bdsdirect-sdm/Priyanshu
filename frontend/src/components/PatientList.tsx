@@ -9,8 +9,11 @@ import '../styles/PatientList.css';
 const PatientList: React.FC = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
+  const doctype = localStorage.getItem('doctype'); // Retrieve doctype from local storage
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredPatients, setFilteredPatients] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 5;
 
   useEffect(() => {
     if (!token) {
@@ -25,6 +28,7 @@ const PatientList: React.FC = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+
       return response.data;
     } catch (err) {
       toast.error(`${err}`);
@@ -45,6 +49,7 @@ const PatientList: React.FC = () => {
             .includes(searchQuery.toLowerCase())
         )
       );
+      setCurrentPage(1); // Reset to the first page on new search
     }
   };
 
@@ -57,7 +62,6 @@ const PatientList: React.FC = () => {
   if (isLoading) {
     return (
       <>
-        <div>Loading...</div>
         <div className="spinner-border text-primary" role="status">
           <span className="visually-hidden">Loading...</span>
         </div>
@@ -75,9 +79,34 @@ const PatientList: React.FC = () => {
 
   console.log('Patient-List------------>', Patients);
 
+  // Pagination logic
+  const totalPatients = filteredPatients.length;
+  const totalPages = Math.ceil(totalPatients / pageSize);
+  const startIndex = (currentPage - 1) * pageSize;
+  const paginatedPatients = filteredPatients.slice(startIndex, startIndex + pageSize);
+
+  const handlePageChange = (page: number) => {
+    if (page > 0 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+  const handleAddPatient = () => {
+    navigate('/add-patient');
+  };
+
   return (
     <div className="patient-list-container">
-      <p className="heading-patient">Referred Patients</p>
+      <div className="header-container-patientlist">
+        <p className="heading-patient">Referred Patients</p>
+
+        {/* Conditionally render the button based on doctype */}
+        {doctype === '2' && (
+          <button className="add-patient-button" onClick={handleAddPatient}>
+            Refer Patient
+          </button>
+        )}
+      </div>
 
       <div className="search-container">
         <input
@@ -104,7 +133,7 @@ const PatientList: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredPatients.map((patient: any, index: number) => (
+          {paginatedPatients.map((patient: any, index: number) => (
             <tr key={index}>
               <td>{patient.firstname} {patient.lastname}</td>
               <td>{patient.disease}</td>
@@ -116,6 +145,33 @@ const PatientList: React.FC = () => {
           ))}
         </tbody>
       </table>
+
+      {/* Pagination controls */}
+      <div className="pagination-container">
+        <button
+          className="page-nav"
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          &lt;
+        </button>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            className={`page-number ${currentPage === index + 1 ? 'active' : ''}`}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button
+          className="page-nav"
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          &gt;
+        </button>
+      </div>
     </div>
   );
 };

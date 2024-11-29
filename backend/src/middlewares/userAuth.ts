@@ -17,7 +17,6 @@ const userAuthMiddleware = async (req: any, res: any, next: NextFunction) => {
         }
 
         req.user = uuid;
-        console.log("huhuhu: ", req.user)
         next();
     });
 };
