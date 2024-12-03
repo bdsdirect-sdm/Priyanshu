@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Local } from '../environment/env';
 import React, { useEffect } from 'react';
 import api from '../api/axiosInstance';
+import '../styles/ViewAppointment.css';
 
 const ViewAppointment: React.FC = () => {
   const navigate = useNavigate();
@@ -11,81 +12,74 @@ const ViewAppointment: React.FC = () => {
 
   useEffect(() => {
     if (!token || !appointmentUUID) {
-      navigate('/login')
+      navigate('/login');
     }
 
     return () => {
       localStorage.removeItem('appointmentId');
       navigate('/appointments');
-    }
+    };
   }, []);
 
   const getAppointment = async () => {
     try {
       const response = await api.get(`${Local.VIEW_APPOINTMENT}/${appointmentUUID}`, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
-      return response.data
-    }
-    catch (err: any) {
+      return response.data;
+    } catch (err: any) {
       console.log(err.response.data.message);
-      // toast.error(err.response.data.message);
     }
-  }
+  };
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['appointment'],
-    queryFn: getAppointment
-  })
+    queryFn: getAppointment,
+  });
 
   if (isLoading) {
     return (
-      <>
-        <div>Loading...</div>
-        <div className="spinner-border text-primary" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </>
-    )
+      <div className="loading-container">
+        <div className="loading-message">Loading...</div>
+        <div className="spinner"></div>
+      </div>
+    );
   }
 
   if (isError) {
     return (
-      <>
-        <div>Error: {error.message}</div>
-      </>
-    )
+      <div className="error-message">
+        Error: {error.message}
+      </div>
+    );
   }
 
-  // console.log("sdafd", data);
-
   return (
-    <>
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">
-            <h1 className='mb-4' >Appointment Details</h1>
-            <div className="card">
-              <div className="card-body">
-                <h5 className="card-title">Patient Name: {data.appointment.patientId.firstname} {data.appointment.patientId.lastname} </h5>
-              </div>
+    <div className="appointment-container">
+      <h1 className="appointment-title">Appointment Details</h1>
+      <div className="appointment-card">
+        <div className="appointment-card-body">
+          <h5 className="appointment-detail-title">
+            Patient Name: {data.appointment.pid.firstname} {data.appointment.pid.lastname}
+          </h5>
+        </div>
 
-              <div className="card-body">
-                <h5 className="card-title"> Appointment Date: {data.appointment.date}</h5>
-              </div>
+        <div className="appointment-card-body">
+          <h5 className="appointment-detail-title">
+            Appointment Date: <span>{new Date(data.appointment.appointmentDate)?.toLocaleDateString()}</span>
+          </h5>
+        </div>
 
-              <div className="card-body">
-                <h5 className="card-title"> Appointment Type: {data.appointment.type == 1 && ("Surgery")} {data.appointment.type == 2 && ("Consultation")} </h5>
-              </div>
-
-            </div>
-          </div>
+        <div className="appointment-card-body">
+          <h5 className="appointment-detail-title">
+            Appointment Type: {data.appointment.type}
+          </h5>
         </div>
       </div>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default ViewAppointment
+export default ViewAppointment;

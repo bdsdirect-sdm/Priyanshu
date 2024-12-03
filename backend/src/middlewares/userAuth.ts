@@ -13,10 +13,11 @@ const userAuthMiddleware = async (req: any, res: any, next: NextFunction) => {
 
     jwt.verify(token, Secret, (err: any, uuid: any) => {
         if (err) {
+            console.log(err);
             return res.status(401).json({ "message": err });
         }
-
         req.user = uuid;
+
         next();
     });
 };

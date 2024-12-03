@@ -1,4 +1,5 @@
 interface config {
+    staff: any;
     VIEW_APPOINTMENT: any;
     EDIT_APPOINTMENT: any;
     GET_ROOM: any;

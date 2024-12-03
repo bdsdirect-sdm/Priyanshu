@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import io from "socket.io-client";
-import "../Styling/Chat.css";
+import "../styles/Chat.css";
 // import '../Styling/Dashboard.css';
 import { toast } from "react-toastify";
 import api from "../api/axiosInstance";

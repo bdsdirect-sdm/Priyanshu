@@ -561,7 +561,7 @@ export const addAppointment = async (req: any, res: any) => {
 };
 export const getAppointment = async (req: any, res: Response) => {
     try {
-        const { appointmentId } = req.params;
+        const appointmentId = req.params.appointmentId;
         const appointment = await Appointment.findByPk(appointmentId, {
             include: [
                 {

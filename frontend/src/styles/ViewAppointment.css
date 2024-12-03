@@ -1,0 +1,76 @@
+/* ViewAppointment.css */
+
+.appointment-container {
+    margin-left: 250px;
+    padding: 20px;
+    border-radius: 8px;
+    min-height: 90vh;
+    background-color: #ecf1f3;
+    margin-top: -19px;
+}
+
+.appointment-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.appointment-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.appointment-card-body {
+    margin-bottom: 20px;
+}
+
+.appointment-detail-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #555;
+}
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f7fc;
+}
+
+.loading-message {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.error-message {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #e74c3c;
+    margin-top: 20px;
+}

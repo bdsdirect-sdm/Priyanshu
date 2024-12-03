@@ -1,20 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import api from '../api/axiosInstance';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Staff.css';
 
+// Yup validation schema
+const validationSchema = Yup.object({
+  staffName: Yup.string().required('Staff Name is required'),
+  email: Yup.string().email('Invalid email format').required('Email is required'),
+  contact: Yup.string()
+    .matches(/^[0-9]{10}$/, 'Phone number must be exactly 10 digits')
+    .required('Contact is required'),
+  gender: Yup.string().required('Gender is required'),
+});
+
 const Staff: React.FC = () => {
   const navigate = useNavigate();
 
-  const [staffName, setStaffName] = useState('');
-  const [email, setEmail] = useState('');
-  const [contact, setContact] = useState('');
-  const [gender, setGender] = useState('Male');
-  const [loading, setLoading] = useState(false);
   const [staffList, setStaffList] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fetchStaffList = async () => {
     const token = localStorage.getItem('token');
@@ -48,9 +56,7 @@ const Staff: React.FC = () => {
     fetchStaffList();
   }, [searchQuery]);
 
-  const handleAddStaff = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const handleAddStaff = async (values: any) => {
     const token = localStorage.getItem('token');
     if (!token) {
       toast.error('Please log in to add staff.');
@@ -58,16 +64,9 @@ const Staff: React.FC = () => {
       return;
     }
 
-    const staffData = {
-      staffName,
-      email,
-      contact,
-      gender,
-    };
-
     try {
       setLoading(true);
-      const response = await api.post('/add-staff', staffData, {
+      const response = await api.post('/add-staff', values, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -75,10 +74,6 @@ const Staff: React.FC = () => {
 
       if (response.data.success) {
         toast.success('Staff added successfully');
-        setStaffName('');
-        setEmail('');
-        setContact('');
-        setGender('Male');
         fetchStaffList();
         setIsModalOpen(false);
       } else {
@@ -105,7 +100,6 @@ const Staff: React.FC = () => {
 
   return (
     <div className="staff-form-container">
-
       <div className='heading-dashboard'>
         <h3>Staff list</h3>
         <button className="btn-color" onClick={handleOpenModal}>
@@ -129,8 +123,6 @@ const Staff: React.FC = () => {
         </button>
       </div>
 
-
-      {/* <h3>Staff List</h3> */}
       <div className="staff-list">
         {staffList.length === 0 ? (
           <p>No staff members found.</p>
@@ -163,66 +155,71 @@ const Staff: React.FC = () => {
           <div className="modal-content">
             <span className="close" onClick={handleCloseModal}>&times;</span>
             <h3>Add New Staff</h3>
-            <form onSubmit={handleAddStaff} className="staff-form">
-              <div className="form-group">
-                <label htmlFor="staffName">Staff Name</label>
-                <input
-                  type="text"
-                  id="staffName"
-                  className="form-control"
-                  value={staffName}
-                  onChange={(e) => setStaffName(e.target.value)}
-                  required
-                />
-              </div>
+            <Formik
+              initialValues={{
+                staffName: '',
+                email: '',
+                contact: '',
+                gender: 'Male',
+              }}
+              validationSchema={validationSchema}
+              onSubmit={handleAddStaff}
+            >
+              {({ isSubmitting }) => (
+                <Form className="staff-form">
+                  <div className="form-group">
+                    <label htmlFor="staffName">Staff Name</label>
+                    <Field
+                      type="text"
+                      id="staffName"
+                      name="staffName"
+                      className="form-control"
+                    />
+                    <ErrorMessage name="staffName" component="div" className="error" />
+                  </div>
 
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  className="form-control"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <Field
+                      type="email"
+                      id="email"
+                      name="email"
+                      className="form-control"
+                    />
+                    <ErrorMessage name="email" component="div" className="error" />
+                  </div>
 
-              <div className="form-group">
-                <label htmlFor="contact">Contact</label>
-                <input
-                  type="text"
-                  id="contact"
-                  className="form-control"
-                  value={contact}
-                  onChange={(e) => setContact(e.target.value)}
-                  required
-                />
-              </div>
+                  <div className="form-group">
+                    <label htmlFor="contact">Contact</label>
+                    <Field
+                      type="text"
+                      id="contact"
+                      name="contact"
+                      className="form-control"
+                    />
+                    <ErrorMessage name="contact" component="div" className="error" />
+                  </div>
 
-              <div className="form-group">
-                <label htmlFor="gender">Gender</label>
-                <select
-                  id="gender"
-                  className="form-control"
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}
-                  required
-                >
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
+                  <div className="form-group">
+                    <label htmlFor="gender">Gender</label>
+                    <Field as="select" id="gender" name="gender" className="form-control">
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                    </Field>
+                    <ErrorMessage name="gender" component="div" className="error" />
+                  </div>
 
-              <button
-                type="submit"
-                className="btn"
-                disabled={loading}
-              >
-                {loading ? 'Adding Staff...' : 'Add Staff'}
-              </button>
-            </form>
+                  <button
+                    type="submit"
+                    className="btn"
+                    disabled={isSubmitting || loading}
+                  >
+                    {loading ? 'Adding Staff...' : 'Add Staff'}
+                  </button>
+                </Form>
+              )}
+            </Formik>
           </div>
         </div>
       )}
@@ -231,4 +228,3 @@ const Staff: React.FC = () => {
 };
 
 export default Staff;
-
