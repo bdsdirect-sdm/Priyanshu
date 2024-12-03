@@ -130,7 +130,7 @@ const Staff: React.FC = () => {
       </div>
 
 
-      <h3>Staff List</h3>
+      {/* <h3>Staff List</h3> */}
       <div className="staff-list">
         {staffList.length === 0 ? (
           <p>No staff members found.</p>

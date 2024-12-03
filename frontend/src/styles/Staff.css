@@ -2,7 +2,7 @@
 .staff-form-container {
     max-width: 75%;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #ecf1f3;
     font-family: Arial, sans-serif;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -109,6 +109,7 @@ select:focus {
     cursor: pointer;
     border: none;
     transition: background-color 0.3s ease;
+    margin-top: 10px;
 }
 
 .btn-search:hover {

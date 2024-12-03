@@ -24,6 +24,7 @@ class Patient extends Model {
     public timing!: string;  // Timing (possibly appointment time)
     public notes!: string;  // Notes
     public laterality!: string;  // Laterality (e.g., Left, Right, or Bilateral)
+    public patientId!: string;
     createdAt: any;
     updatedAt: any;
 }

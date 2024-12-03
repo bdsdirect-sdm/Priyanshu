@@ -51,7 +51,7 @@
 
 .refer {
     display: flex;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     align-items: center;
     justify-content: space-between;
 }
@@ -60,6 +60,7 @@
     cursor: pointer;
     width: fit-content;
     position: relative;
+    margin-top: 0px;
 }
 
 .appointment-btn:hover {

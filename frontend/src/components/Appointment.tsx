@@ -6,10 +6,11 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import "../styles/Appointment.css";
 import { IoIosArrowBack } from "react-icons/io";
+
 interface Appointment {
     patientName: string;
     appointmentDate: Date;
-    type: 'Consultant' | 'Surgery';
+    type: string;
 }
 
 const AppointmentForm: React.FC = () => {
@@ -19,7 +20,7 @@ const AppointmentForm: React.FC = () => {
     const [formData, setFormData] = useState<Appointment>({
         patientName: '',
         appointmentDate: new Date(),
-        type: 'Consultant',
+        type: 'Select type',
     });
 
     const [minDate, setMinDate] = useState<string>('');
@@ -54,10 +55,12 @@ const AppointmentForm: React.FC = () => {
         const formattedDate = today.toISOString().split('T')[0];
         setMinDate(formattedDate);
     }, []);
+
     const handleCancel = () => {
         // Navigate back to the appointments page or any other relevant page
         navigate('/appointments');
     };
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData((prevState) => ({
@@ -68,9 +71,21 @@ const AppointmentForm: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        // Custom validation for patient selection
+        if (!formData.patientName || formData.patientName === '' || formData.patientName === 'Select Patient') {
+            toast.error('Please select a patient.');
+            return;
+        }
 
-        if (!formData.patientName || !formData.appointmentDate || !formData.type) {
-            toast.error('Please fill in all required fields.');
+        // Custom validation for appointment type selection
+        if (!formData.type || formData.type === 'Select type') {
+            toast.error('Please select an appointment type.');
+            return;
+        }
+
+        // Custom validation for appointment date
+        if (!formData.appointmentDate) {
+            toast.error('Please select an appointment date.');
             return;
         }
 
@@ -94,6 +109,11 @@ const AppointmentForm: React.FC = () => {
         } catch (err) {
             toast.error('Failed to create appointment: ' + err);
         }
+    };
+
+    // Focus handler to trigger date picker directly
+    const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+        e.target.showPicker(); // This will directly open the date picker when the input is focused
     };
 
     if (isLoading) {
@@ -126,10 +146,9 @@ const AppointmentForm: React.FC = () => {
                         name="patientName"
                         value={formData.patientName}
                         onChange={handleChange}
-                        required
                         className="form-control"
                     >
-                        <option value="">Select a Patient</option>
+                        <option value="">Select Patient</option>
                         {patients?.map((patient: any) => (
                             <option key={patient.uuid} value={patient.uuid}>
                                 {patient.firstname} {patient.lastname}
@@ -146,7 +165,7 @@ const AppointmentForm: React.FC = () => {
                         name="appointmentDate"
                         value={formData.appointmentDate.toISOString().split('T')[0]}
                         onChange={handleChange}
-                        required
+                        onFocus={handleFocus} // Triggers the date picker on focus
                         className="form-control"
                         min={minDate}
                     />
@@ -159,9 +178,9 @@ const AppointmentForm: React.FC = () => {
                         name="type"
                         value={formData.type}
                         onChange={handleChange}
-                        required
                         className="form-select"
                     >
+                        <option value="">Select type</option>
                         <option value="Consultant">Consultant</option>
                         <option value="Surgery">Surgery</option>
                     </select>

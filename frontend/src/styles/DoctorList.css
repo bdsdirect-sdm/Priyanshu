@@ -1,7 +1,7 @@
 .doctor-list-container {
     margin-left: 250px;
     padding: 20px;
-    background-color: #f8f9fa;
+    background-color: #ecf1f3;
     height: calc(100vh - 60px);
     overflow-y: auto;
 

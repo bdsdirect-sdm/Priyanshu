@@ -6,3 +6,31 @@
     margin-top: -19px;
     overflow-y: auto;
 }
+
+.wrap-content {
+    margin-left: 250px;
+    padding: 20px;
+    border-radius: 8px;
+    min-height: 90vh;
+    background-color: #ecf1f3;
+    margin-top: -19px;
+}
+
+.btn-add-appointment {
+    grid-column: span 3;
+    padding: 10px 20px;
+    background-color: #35C0E4;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+.btn-appointment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: -60px;
+}

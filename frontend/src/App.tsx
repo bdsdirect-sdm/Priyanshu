@@ -18,6 +18,7 @@ import './App.css'
 import Chat from './components/chat';
 import Appointment from './components/Appointment';
 import AppointmentList from './components/AppointmentList';
+import ViewAppointment from './components/ViewAppointment';
 
 const App: react.FC = () => {
 
@@ -82,6 +83,10 @@ const App: react.FC = () => {
         {
           path: 'add-appointment',
           element: <Appointment />,
+        },
+        {
+          path: '/view-appointment',
+          element: <ViewAppointment />,
         }
 
       ]

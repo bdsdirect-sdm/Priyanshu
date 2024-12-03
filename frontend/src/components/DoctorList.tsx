@@ -57,7 +57,7 @@ const DoctorList: React.FC = () => {
 
   return (
     <div className="doctor-list-container">
-      <h2 className="doctor-list-title">Doctor List</h2>
+      <h2 className="doctor-list-title">Doctors List</h2>
       <div className="table-container">
         <table className="table ">
           <thead>

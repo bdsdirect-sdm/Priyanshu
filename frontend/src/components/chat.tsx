@@ -29,7 +29,6 @@ const Chat: React.FC = () => {
             socket.emit("joinchat", chatdata);
 
             socket.on("prev_msg", async (data: any) => {
-                console.log("boom", data);
                 setMessages([]);
                 await data.map((metadata: any) =>
                     setMessages((prev: any) => [...prev, metadata])
@@ -89,7 +88,6 @@ const Chat: React.FC = () => {
 
 
 
-    console.log("boom-------->", chatdata);
 
     const sendMessage = async () => {
         if (newMessage.trim() === "") {
@@ -104,7 +102,6 @@ const Chat: React.FC = () => {
                 receiver: receiver,
                 room: localStorage.getItem("room"),
             };
-            console.log("==>", data)
             socket.emit("send_message", data);
             setNewMessage("");
         }
@@ -130,9 +127,7 @@ const Chat: React.FC = () => {
             </>
         )
     }
-    console.log(pname);
-    console.log("ssss", messages);
-    console.log("------>", rooms);
+
     return (
         <>
             <div className="chat-layout">

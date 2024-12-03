@@ -559,6 +559,27 @@ export const addAppointment = async (req: any, res: any) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 };
+export const getAppointment = async (req: any, res: Response) => {
+    try {
+        const { appointmentId } = req.params;
+        const appointment = await Appointment.findByPk(appointmentId, {
+            include: [
+                {
+                    model: Patient,
+                    as: "pid",
+                }
+            ]
+        });
+        if (appointment) {
+            res.status(200).json({ 'appointment': appointment, "message": "Appointment Found" });
+        } else {
+            res.status(404).json({ "message": "Appointment not Found" });
+        }
+    }
+    catch (err) {
+        res.status(500).json({ "message": err });
+    }
+}
 export const getAppointments = async (req: any, res: any) => {
     try {
         const { patientId } = req.query;
@@ -573,7 +594,18 @@ export const getAppointments = async (req: any, res: any) => {
 
             appointments = await Appointment.findAll({ where: { patientId } });
         } else {
-            appointments = await Appointment.findAll();
+            appointments = await Appointment.findAll({
+                include: [
+                    {
+                        model: Patient,
+                        as: 'pid'
+                    },
+                    {
+                        model: User,
+                        as: 'uid'
+                    }
+                ]
+            });
         }
 
         return res.status(200).json({
@@ -586,6 +618,7 @@ export const getAppointments = async (req: any, res: any) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 };
+
 export const getRooms = async (req: any, res: Response) => {
     try {
         const { uuid } = req.user;

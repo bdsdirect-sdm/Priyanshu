@@ -48,7 +48,7 @@
 .heading-patient {
     /* font-size: var(--heading-size); */
     color: var(--heading-color);
-    font-size: 2rem;
+    font-size: -2rem;
 }
 
 /* Styling for the search input */
@@ -56,7 +56,7 @@
     display: flex;
     gap: 1rem;
     align-items: center;
-    padding: 10px;
+    /* padding: 10px; */
     margin-bottom: 20px;
     border-radius: 5px;
 }
@@ -72,6 +72,7 @@
     color: #fff;
     font-weight: 600;
     font-size: 16px;
+    margin-top: 0px;
 
 }
 

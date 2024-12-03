@@ -17,7 +17,6 @@ export const setSocket = (httpServer: any) => {
         console.log('Client connected');
 
         socket.on('joinchat', async (data: any) => {
-            console.log("yea yea", data);
             joinRoom(socket, data);
         });
 

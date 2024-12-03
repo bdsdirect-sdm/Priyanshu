@@ -1,4 +1,6 @@
 interface config {
+    VIEW_APPOINTMENT: any;
+    EDIT_APPOINTMENT: any;
     GET_ROOM: any;
     ADD_APPOINTMENT: any;
     UPDATE_USER: any;
@@ -35,5 +37,7 @@ export const Local: config = {
     CHANGE_PASSWORD: import.meta.env.VITE_CHANGE_PASSWORD,
     ADD_APPOINTMENT: import.meta.env.VITE_ADD_APPOINTMENT,
     GET_APPOINTMENT_LIST: import.meta.env.VITE_GET_APPOINTMENTLIST,
-    GET_ROOM: import.meta.env.VITE_GET_ROOM
+    GET_ROOM: import.meta.env.VITE_GET_ROOM,
+    EDIT_APPOINTMENT: import.meta.env.VITE_EDIT_APPOINTMENT,
+    VIEW_APPOINTMENT: import.meta.env.VITE_VIEW_APPOINTMENT
 }

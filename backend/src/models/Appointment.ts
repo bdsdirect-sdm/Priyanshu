@@ -47,10 +47,10 @@ Appointment.init({
     underscored: true,  // Optional: use snake_case for column names
 });
 
-Patient.hasMany(Appointment, { foreignKey: 'patientId' });
-Appointment.belongsTo(Patient, { foreignKey: 'patientId' });
+Patient.hasMany(Appointment, { foreignKey: 'patientId', as: "pid" });
+Appointment.belongsTo(Patient, { foreignKey: 'patientId', as: "pid" });
 
-User.hasMany(Appointment, { foreignKey: 'createdBy' });  // Example of associating an appointment to a user (who created it)
-Appointment.belongsTo(User, { foreignKey: 'createdBy' });
+User.hasMany(Appointment, { foreignKey: 'createdBy', as: 'uid' });  // Example of associating an appointment to a user (who created it)
+Appointment.belongsTo(User, { foreignKey: 'createdBy', as: 'uid' });
 
 export default Appointment;

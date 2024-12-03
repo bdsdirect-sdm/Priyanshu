@@ -5,7 +5,6 @@ import Room from "../models/Room";
 
 export const joinRoom = async (socket: any, data: any) => {
     try {
-        console.log("\n\nxxxxx\n\n", data);
         const room = await Room.findOne({
             where: {
                 user_id_1: data.user1,
@@ -55,7 +54,6 @@ export const joinRoom = async (socket: any, data: any) => {
 
 export const sendMessage = async (socket: any, message: any) => {
     try {
-        console.log("\n\nMessage", message);
         const chat = await Chat.create({
             message: message.message,
             room_id: message.room, sender_id: message.sender,

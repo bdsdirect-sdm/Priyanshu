@@ -37,13 +37,6 @@
     margin-bottom: 8px;
 }
 
-.form-group select,
-.form-group input {
-    padding: 8px;
-    border: 1px solid #fff;
-    border-radius: 4px;
-}
-
 button {
     grid-column: span 3;
     /* Make the button span across all columns */
@@ -67,4 +60,9 @@ button {
     font-weight: 600;
     font-size: 16px;
     transition: 0.5s;
+}
+
+.form-select {
+    height: 44px;
+    margin-top: 6px;
 }
