@@ -19,6 +19,7 @@ import Chat from './components/chat';
 import Appointment from './components/Appointment';
 import AppointmentList from './components/AppointmentList';
 import ViewAppointment from './components/ViewAppointment';
+import ViewPatient from './components/Viewpatient';
 
 const App: react.FC = () => {
 
@@ -53,6 +54,10 @@ const App: react.FC = () => {
         {
           path: '/add-patient',
           element: <AddPatient />
+        },
+        {
+          path: '/view-patient',
+          element: <ViewPatient />
         },
         {
           path: '/doctor',

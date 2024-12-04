@@ -302,6 +302,35 @@ export const getPatientList = async (req: any, res: Response) => {
 //         res.status(500).json({ "message": `${err}` });
 //     }
 // }
+export const getPatient = async (req: any, res: Response) => {
+    try {
+        const { patientId } = req.params;
+        console.log("qwerfewr", patientId)
+        const { uuid } = req.user;
+        const user = await User.findByPk(uuid);
+        if (user) {
+
+            const patient = await Patient.findByPk(patientId);
+            const refertoUser = await User.findByPk(patient?.referedto);
+            const referbyUser = await User.findByPk(patient?.referedby);
+            const address = await Address.findByPk(patient?.address);
+
+            if (patient) {
+                res.status(200).json({ "patient": patient, "message": "Patient Found Successfully", "referto": refertoUser, "referby": referbyUser, "address": address });
+            }
+            else {
+                res.status(404).json({ "message": "Patient not Found" });
+            }
+        }
+        else {
+            res.status(400).json({ "message": "You're not authorized " })
+        }
+    }
+    catch (err) {
+        res.status(500).json({ "message": `${err}` });
+    }
+}
+
 
 
 export const addPatient = async (req: any, res: any) => {

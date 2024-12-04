@@ -1,4 +1,5 @@
 interface config {
+    VIEW_PATIENT: any;
     staff: any;
     VIEW_APPOINTMENT: any;
     EDIT_APPOINTMENT: any;
@@ -40,5 +41,7 @@ export const Local: config = {
     GET_APPOINTMENT_LIST: import.meta.env.VITE_GET_APPOINTMENTLIST,
     GET_ROOM: import.meta.env.VITE_GET_ROOM,
     EDIT_APPOINTMENT: import.meta.env.VITE_EDIT_APPOINTMENT,
-    VIEW_APPOINTMENT: import.meta.env.VITE_VIEW_APPOINTMENT
+    VIEW_APPOINTMENT: import.meta.env.VITE_VIEW_APPOINTMENT,
+    VIEW_PATIENT: import.meta.env.VITE_VIEW_PATIENT,
+    staff: undefined
 }
