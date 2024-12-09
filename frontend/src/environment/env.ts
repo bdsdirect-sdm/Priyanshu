@@ -1,4 +1,5 @@
 interface config {
+    EDIT_PATIENT: any;
     VIEW_PATIENT: any;
     staff: any;
     VIEW_APPOINTMENT: any;
@@ -43,5 +44,6 @@ export const Local: config = {
     EDIT_APPOINTMENT: import.meta.env.VITE_EDIT_APPOINTMENT,
     VIEW_APPOINTMENT: import.meta.env.VITE_VIEW_APPOINTMENT,
     VIEW_PATIENT: import.meta.env.VITE_VIEW_PATIENT,
-    staff: undefined
+    staff: undefined,
+    EDIT_PATIENT: import.meta.env.VITE_EDIT_PATIENT
 }

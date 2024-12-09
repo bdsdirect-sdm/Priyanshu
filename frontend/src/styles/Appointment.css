@@ -47,7 +47,7 @@ button {
     font-size: 16px;
     cursor: pointer;
     border-radius: 4px;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
 .btn-submit {

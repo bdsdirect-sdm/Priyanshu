@@ -141,7 +141,7 @@ const Dashboard: React.FC = () => {
                 </div>
 
                 <div className="card" onClick={() => navigate('/doctor')}>
-                    <div className="card-body">MD
+                    <div className="card-body">Doctor OD/MD
                         <div className='icon d-flex'>
                             <img src="0685f1c668f1deb33e75.png" alt="EyeRefer" className='icon-2' />
                             <div className="card-text">{totalDoctors}</div>
@@ -151,7 +151,7 @@ const Dashboard: React.FC = () => {
             </div>
 
             <div className='refer d-flex'>
-                {user.doctype === 2 ? (<><h2 className="refer-title">Referrals Placed</h2><button className="appointment-btn" onClick={() => navigate("/add-patient")}>+Add Referral patient</button></>) : <><h2 className="refer-title">Add Appointment</h2><button className="appointment-btn" onClick={() => navigate("/add-appointment")}>+Add Appointment</button></>}
+                {user.doctype === 2 ? (<><h2 className="refer-title">Referral Patient</h2><button className="appointment-btn" onClick={() => navigate("/add-patient")}>+Add Referral patient</button></>) : <><h2 className="refer-title">Add Appointment</h2><button className="appointment-btn" onClick={() => navigate("/add-appointment")}>+Add Appointment</button></>}
             </div>
 
             <div className="patient-list-section">

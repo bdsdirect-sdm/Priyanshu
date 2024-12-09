@@ -237,3 +237,8 @@
     display: ruby;
 
 }
+
+.charts-container {
+    display: flex;
+    gap: 30%
+}

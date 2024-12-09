@@ -20,6 +20,7 @@ import Appointment from './components/Appointment';
 import AppointmentList from './components/AppointmentList';
 import ViewAppointment from './components/ViewAppointment';
 import ViewPatient from './components/Viewpatient';
+import EditPatient from './components/EditPatient';
 
 const App: react.FC = () => {
 
@@ -58,6 +59,10 @@ const App: react.FC = () => {
         {
           path: '/view-patient',
           element: <ViewPatient />
+        },
+        {
+          path: '/edit-patient',
+          element: <EditPatient />
         },
         {
           path: '/doctor',

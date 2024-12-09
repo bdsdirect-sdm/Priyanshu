@@ -4,8 +4,6 @@
 // import api from '../api/axiosInstance';
 // import { useNavigate } from 'react-router-dom';
 // import { toast } from 'react-toastify';
-// // import jsPDF from 'jspdf';
-// // import 'jspdf-autotable';  // Optional: for tables in PDF
 // import '../styles/PatientList.css';
 
 // const PatientList: React.FC = () => {
@@ -16,6 +14,10 @@
 //   const [filteredPatients, setFilteredPatients] = useState<any[]>([]);
 //   const [currentPage, setCurrentPage] = useState(1);
 //   const pageSize = 5;
+//   const [sortConfig, setSortConfig] = useState({
+//     key: '',
+//     direction: 'asc' as 'asc' | 'desc',
+//   });
 
 //   useEffect(() => {
 //     if (!token) {
@@ -61,6 +63,42 @@
 //     }
 //   }, [searchQuery, Patients]);
 
+//   const handleSort = (key: string) => {
+//     let direction: 'asc' | 'desc' = 'asc';
+
+//     if (sortConfig.key === key && sortConfig.direction === 'asc') {
+//       direction = 'desc';
+//     }
+
+//     setSortConfig({
+//       key,
+//       direction,
+//     });
+//   };
+
+//   // Sorting logic
+//   const sortedPatients = React.useMemo(() => {
+//     if (!filteredPatients) return [];
+//     let sortedData = [...filteredPatients];
+
+//     if (sortConfig.key) {
+//       sortedData = sortedData.sort((a, b) => {
+//         const aValue = a[sortConfig.key];
+//         const bValue = b[sortConfig.key];
+
+//         if (aValue < bValue) {
+//           return sortConfig.direction === 'asc' ? -1 : 1;
+//         }
+//         if (aValue > bValue) {
+//           return sortConfig.direction === 'asc' ? 1 : -1;
+//         }
+//         return 0;
+//       });
+//     }
+
+//     return sortedData;
+//   }, [filteredPatients, sortConfig]);
+
 //   if (isLoading) {
 //     return (
 //       <>
@@ -80,10 +118,10 @@
 //   }
 
 //   // Pagination logic
-//   const totalPatients = filteredPatients.length;
+//   const totalPatients = sortedPatients.length;
 //   const totalPages = Math.ceil(totalPatients / pageSize);
 //   const startIndex = (currentPage - 1) * pageSize;
-//   const paginatedPatients = filteredPatients.slice(startIndex, startIndex + pageSize);
+//   const paginatedPatients = sortedPatients.slice(startIndex, startIndex + pageSize);
 
 //   const handlePageChange = (page: number) => {
 //     if (page > 0 && page <= totalPages) {
@@ -95,38 +133,10 @@
 //     navigate('/add-patient');
 //   };
 
-//   // // Generate PDF function
-//   // const generatePDF = () => {
-//   //   const doc = new jsPDF();
-
-//   //   // Set title
-//   //   doc.setFontSize(20);
-//   //   doc.text('Patient List', 14, 20);
-
-//   //   // Create table headers
-//   //   doc.setFontSize(12);
-//   //   doc.autoTable({
-//   //     head: [['Patient Name', 'Disease', 'Refer by', 'Refer to', 'Refer back', 'Status']],
-//   //     body: paginatedPatients.map((patient: any) => [
-//   //       `${patient.firstname} ${patient.lastname}`,
-//   //       patient.disease,
-//   //       `${patient.referedby.firstname} ${patient.referedby.lastname}`,
-//   //       `${patient.referedto.firstname} ${patient.referedto.lastname}`,
-//   //       patient.referback ? 'Yes' : 'No',
-//   //       patient.referalstatus ? 'Completed' : 'Pending',
-//   //     ]),
-//   //     startY: 30, // Start table below the title
-//   //     theme: 'grid',
-//   //   });
-
-//   //   // Save the generated PDF
-//   //   doc.save('patient-list.pdf');
-//   // };
-
 //   return (
 //     <div className="patient-list-container">
 //       <div className="header-container-patientlist">
-//         <p className="heading-patient">Referred Patients</p>
+//         <p className="heading-patient">Referred Patient</p>
 
 //         {/* Conditionally render the button based on doctype */}
 //         {doctype === '2' && (
@@ -134,11 +144,6 @@
 //             Refer Patient
 //           </button>
 //         )}
-
-//         {/* Generate PDF button */}
-//         {/* <button className="generate-pdf-button" onClick={generatePDF}>
-//             Generate PDF
-//           </button> */}
 //       </div>
 
 //       <div className="search-container">
@@ -157,12 +162,30 @@
 //       <table className="table">
 //         <thead>
 //           <tr>
-//             <th scope="col">Patient Name</th>
-//             <th scope="col">Disease</th>
-//             <th scope="col">Refer by</th>
-//             <th scope="col">Refer to</th>
-//             <th scope="col">Refer back</th>
-//             <th scope="col">Status</th>
+//             <th scope="col" onClick={() => handleSort('firstname')}>
+//               Patient Name
+//               {sortConfig.key === 'firstname' && (sortConfig.direction === 'asc' ? ' 🔼' : ' 🔽')}
+//             </th>
+//             <th scope="col" onClick={() => handleSort('disease')}>
+//               Disease
+//               {sortConfig.key === 'disease' && (sortConfig.direction === 'asc' ? ' 🔼' : ' 🔽')}
+//             </th>
+//             <th scope="col" onClick={() => handleSort('referedby')}>
+//               Refer by
+//               {sortConfig.key === 'referedby' && (sortConfig.direction === 'asc' ? ' 🔼' : ' 🔽')}
+//             </th>
+//             <th scope="col" onClick={() => handleSort('referedto')}>
+//               Refer to
+//               {sortConfig.key === 'referedto' && (sortConfig.direction === 'asc' ? ' 🔼' : ' 🔽')}
+//             </th>
+//             <th scope="col" onClick={() => handleSort('referback')}>
+//               Refer back
+//               {sortConfig.key === 'referback' && (sortConfig.direction === 'asc' ? ' 🔼' : ' 🔽')}
+//             </th>
+//             <th scope="col" onClick={() => handleSort('referalstatus')}>
+//               Status
+//               {sortConfig.key === 'referalstatus' && (sortConfig.direction === 'asc' ? ' 🔼' : ' 🔽')}
+//             </th>
 //             <th scope="col">Action</th>
 //           </tr>
 //         </thead>
@@ -176,22 +199,43 @@
 //               <td>{patient.referback ? 'Yes' : 'No'}</td>
 //               <td>{patient.referalstatus ? 'Completed' : 'Pending'}</td>
 //               <td>
-//                 <div>
-//                   <svg
-//                     xmlns="http://www.w3.org/2000/svg"
-//                     width="16"
-//                     height="16"
-//                     fill="currentColor"
-//                     className="bi bi-eye text-success"
-//                     viewBox="0 0 16 16"
-//                     onClick={() => {
-//                       localStorage.setItem("patientId", patient.uuid);
-//                       navigate('/view-patient');
-//                     }}
-//                   >
-//                     <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
-//                     <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-//                   </svg>
+//                 <div className='action'>
+//                   <div>
+
+//                     <svg
+//                       xmlns="http://www.w3.org/2000/svg"
+//                       width="16"
+//                       height="16"
+//                       fill="currentColor"
+//                       className="bi bi-eye text-success"
+//                       viewBox="0 0 16 16"
+//                       onClick={() => {
+//                         localStorage.setItem('patientId', patient.uuid);
+//                         navigate('/view-patient');
+//                       }}
+//                     >
+//                       <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
+//                       <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+//                     </svg>
+//                   </div>
+//                   <div>
+
+//                     <svg
+//                       xmlns="http://www.w3.org/2000/svg"
+//                       width="16"
+//                       height="16"
+//                       fill="currentColor"
+//                       className="bi bi-pencil text-warning"
+//                       viewBox="0 0 16 16"
+//                       onClick={() => {
+//                         localStorage.setItem('patientId', patient.uuid);
+//                         navigate('/edit-patient');
+//                       }}
+//                     >
+//                       <path d="M12.146 0L16 3.854l-2.292 2.292L9.854 2.292 7.707 0 5.854 2.146 10.854 7.146 13.146 4.854l1.354-1.354L12.146 0z" />
+//                       <path d="M0 12.5V16h3.5l8-8L8.146 4.354l-8 8H0z" />
+//                     </svg>
+//                   </div>
 //                 </div>
 //               </td>
 //             </tr>
@@ -230,7 +274,7 @@
 // };
 
 // export default PatientList;
-///////////////////////////
+////////////////////////////////////////
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Local } from '../environment/env';
@@ -366,10 +410,17 @@ const PatientList: React.FC = () => {
     navigate('/add-patient');
   };
 
+  // Handle the Enter key press
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="patient-list-container">
       <div className="header-container-patientlist">
-        <p className="heading-patient">Referred Patients</p>
+        <p className="heading-patient">Referred Patient</p>
 
         {/* Conditionally render the button based on doctype */}
         {doctype === '2' && (
@@ -386,6 +437,7 @@ const PatientList: React.FC = () => {
           placeholder="Search by name..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={handleKeyDown}  // Add this to handle Enter key
         />
         <button className="search-button" onClick={handleSearch}>
           Search
@@ -432,22 +484,43 @@ const PatientList: React.FC = () => {
               <td>{patient.referback ? 'Yes' : 'No'}</td>
               <td>{patient.referalstatus ? 'Completed' : 'Pending'}</td>
               <td>
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-eye text-success"
-                    viewBox="0 0 16 16"
-                    onClick={() => {
-                      localStorage.setItem('patientId', patient.uuid);
-                      navigate('/view-patient');
-                    }}
-                  >
-                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
-                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-                  </svg>
+                <div className='action'>
+                  <div>
+
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-eye text-success"
+                      viewBox="0 0 16 16"
+                      onClick={() => {
+                        localStorage.setItem('patientId', patient.uuid);
+                        navigate('/view-patient');
+                      }}
+                    >
+                      <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
+                      <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                    </svg>
+                  </div>
+                  <div>
+
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-pencil text-warning"
+                      viewBox="0 0 16 16"
+                      onClick={() => {
+                        localStorage.setItem('patientId', patient.uuid);
+                        navigate('/edit-patient');
+                      }}
+                    >
+                      <path d="M12.146 0L16 3.854l-2.292 2.292L9.854 2.292 7.707 0 5.854 2.146 10.854 7.146 13.146 4.854l1.354-1.354L12.146 0z" />
+                      <path d="M0 12.5V16h3.5l8-8L8.146 4.354l-8 8H0z" />
+                    </svg>
+                  </div>
                 </div>
               </td>
             </tr>

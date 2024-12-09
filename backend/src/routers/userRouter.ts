@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { registerUser, loginUser, verifyUser, getUser, getDocList, getPatientList, addPatient, addAddress, getDoctorList, updateprofile, deleteAddress, changePassword, addStaff, getStaff, addAppointment, getAppointments, getRooms, getAppointment, getPatient } from "../controllers/userController";
+import { registerUser, loginUser, verifyUser, getUser, getDocList, getPatientList, addPatient, addAddress, getDoctorList, updateprofile, deleteAddress, changePassword, addStaff, getStaff, addAppointment, getAppointments, getRooms, getAppointment, getPatient, updatePatient } from "../controllers/userController";
 import userAuthMiddleware from "../middlewares/userAuth";
 import signupValidation from "../middlewares/formValidation.ts/signupValidation";
 import loginValidation from "../middlewares/formValidation.ts/loginValidation";
@@ -13,6 +13,7 @@ router.get('/user', userAuthMiddleware, getUser);
 router.get('/doctor-list', userAuthMiddleware, getDoctorList);
 router.get('/doc-list', userAuthMiddleware, getDocList);
 router.get('/patient-list', userAuthMiddleware, getPatientList);
+router.put('/update-patient/:patientId', userAuthMiddleware, updatePatient);
 router.get('/appointment-list', userAuthMiddleware, getAppointments);
 router.get('/room-list', userAuthMiddleware, getRooms);
 router.get('/view-appointment/:appointmentId', userAuthMiddleware, getAppointment);

@@ -331,6 +331,35 @@ export const getPatient = async (req: any, res: Response) => {
     }
 }
 
+export const updatePatient = async (req: any, res: Response) => {
+    try {
+        const { patientId } = req.params;
+        const { uuid } = req.user;
+        const user = await User.findByPk(uuid);
+        if (user) {
+            const patient = await Patient.findByPk(patientId);
+            if (patient) {
+
+                const updatedPatient = await patient.update(req.body);
+                if (updatedPatient) {
+                    res.status(200).json({ "message": "Patient Updated Successfully" });
+                }
+                else {
+                    res.status(400).json({ "message": "Patient not Updated" });
+                }
+            }
+            else {
+                res.status(404).json({ "message": "Patient not Found" });
+            }
+        }
+        else {
+            res.status(400).json({ "message": "You're not authorized " });
+        }
+    }
+    catch (err) {
+        res.status(500).json({ "message": err });
+    }
+}
 
 
 export const addPatient = async (req: any, res: any) => {

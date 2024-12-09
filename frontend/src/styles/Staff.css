@@ -19,8 +19,11 @@
 }
 
 .heading-dashboard h3 {
-    font-size: 24px;
-    color: #333;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #343a40;
+    margin-top: 20px;
 }
 
 /* Form Styles */
