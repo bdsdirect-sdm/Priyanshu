@@ -8,6 +8,7 @@ import userRouter from './routers/userRouter';
 // import Room from "./models/Room";
 import { createServer } from 'http';
 import { setSocket } from './socket/socket';
+import Notification from './models/Notifications';
 // import sequelize from 'seq';
 
 const app = express();
@@ -21,7 +22,7 @@ app.use(express.json());
 app.use("/", userRouter);
 
 
-sequelize.sync().then(() => {
+sequelize.sync({ alter: false }).then(() => {
     console.log('Database connected');
 
     httpServer.listen(Local.SERVER_PORT, () => {
@@ -30,3 +31,4 @@ sequelize.sync().then(() => {
 }).catch((err) => {
     console.log("Error: ", err);
 })
+Notification.afterBulkCreate

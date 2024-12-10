@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import "../styles/Appointment.css";
 import { IoIosArrowBack } from "react-icons/io";
+import socket from '../utils/Socket'
 
 interface Appointment {
     patientName: string;
@@ -57,7 +58,6 @@ const AppointmentForm: React.FC = () => {
     }, []);
 
     const handleCancel = () => {
-        // Navigate back to the appointments page or any other relevant page
         navigate('/appointments');
     };
 
@@ -71,19 +71,16 @@ const AppointmentForm: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Custom validation for patient selection
         if (!formData.patientName || formData.patientName === '' || formData.patientName === 'Select Patient') {
             toast.error('Please select a patient.');
             return;
         }
 
-        // Custom validation for appointment type selection
         if (!formData.type || formData.type === 'Select type') {
             toast.error('Please select an appointment type.');
             return;
         }
 
-        // Custom validation for appointment date
         if (!formData.appointmentDate) {
             toast.error('Please select an appointment date.');
             return;
@@ -101,9 +98,13 @@ const AppointmentForm: React.FC = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-
             if (response.data.success) {
                 toast.success(response.data.message);
+                socket.emit("sendNotification", {
+                    message: `Dr.  had fixed the appointment of ${response?.data?.pid?.firstname}`,
+                    room: fck?.referedby?.uuid,
+                });
+
                 navigate('/appointments');
             }
         } catch (err) {
@@ -111,9 +112,9 @@ const AppointmentForm: React.FC = () => {
         }
     };
 
-    // Focus handler to trigger date picker directly
+
     const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-        e.target.showPicker(); // This will directly open the date picker when the input is focused
+        e.target.showPicker();
     };
 
     if (isLoading) {
@@ -134,7 +135,7 @@ const AppointmentForm: React.FC = () => {
             </div>
         );
     }
-
+    const fck = patients.find((p: any) => p.uuid == formData.patientName);
     return (
         <div className="add-patient-container">
             <h2 className="form-title"><IoIosArrowBack className="icon-back" onClick={handleCancel} />Add Appointment</h2>

@@ -242,3 +242,9 @@
     display: flex;
     gap: 30%
 }
+
+.date-adjusted {
+    position: absolute;
+    padding: inherit;
+    padding: 47px 62px;
+}

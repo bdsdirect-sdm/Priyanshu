@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import '../styles/Dashboard.css';
+import socket from "../utils/Socket";
 
 const Dashboard: React.FC = () => {
     const navigate = useNavigate();
@@ -25,6 +26,27 @@ const Dashboard: React.FC = () => {
         navigate('/chat')
         return;
     }
+    ////////////////////////////////////
+    useEffect(() => {
+        const handleNotification = (data: any) => {
+            if (data?.message) {
+                console.log(data?.message);
+                toast.success(data?.message);
+
+            } else {
+                console.warn("Received notification without message:", data);
+            }
+        };
+
+        socket.on("notification", handleNotification);
+
+        return () => {
+            socket.off("notification", handleNotification);
+        };
+    }, [socket]);
+    /////////////////////
+
+
     useEffect(() => {
         if (!token) {
             navigate("/login");
@@ -87,6 +109,14 @@ const Dashboard: React.FC = () => {
         queryFn: fetchDoctorList
     });
 
+    console.log("sssss", userData?.data.user?.uuid);
+    useEffect(() => {
+        socket.emit("joinnotification", {
+            id: userData?.data.user?.uuid,
+        });
+        console.log("idddddddddddddd", socket.id);
+    }, [userData?.data.user?.uuid]);
+
     if (userError || patientError || doctorError) {
         return (
             <div className="error-container">
@@ -99,9 +129,28 @@ const Dashboard: React.FC = () => {
 
     const { patientList } = patientData || {};
     const { doctorList } = doctorData || {};
-
+    console.log("gfgfras", patientList)
     localStorage.setItem("firstname", user.firstname || "");
     localStorage.setItem("lastname", user.lastname || "");
+
+    const lastupdated = user.updatedAt;
+    console.log("dgsdg", lastupdated)
+    const dateObj = new Date(lastupdated);
+
+    // Get the month (0-based, so add 1 to display actual month number)
+    const month = dateObj.getMonth() + 1; // December is 11, so adding 1 will give 12
+
+    // Get the day of the month
+    const day = dateObj.getDate(); // 29
+
+    // Optionally, if you want the month's name (e.g., "December"), use this array
+    const months = [
+        'Jan', 'Feb', 'March', 'April', 'May', 'June', 'July',
+        'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+
+    const monthName = months[dateObj.getMonth()]; // Get the name of the month
+    ///////////////////////////////////////////
 
     const totalRefersReceived = patientList?.length || 0;
     const totalRefersCompleted = patientList?.filter((patient: { referalstatus: boolean }) => patient.referalstatus === true).length || 0;
@@ -127,6 +176,9 @@ const Dashboard: React.FC = () => {
                         <div className='icon d-flex'>
                             <img src="5be148eb11e3f4de1fe4.svg" alt="EyeRefer" className='icon-2' />
                             <div className="card-text">{totalRefersReceived}</div>
+                            <div className='date-adjusted'>
+                                Last updated : {monthName} {day}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -136,6 +188,9 @@ const Dashboard: React.FC = () => {
                         <div className='icon d-flex'>
                             <img src="77540cee2e45a0c333cd.svg" alt="EyeRefer" className='icon-2' />
                             <div className="card-text">{totalRefersCompleted}</div>
+                            <div className='date-adjusted'>
+                                Last updated :  {monthName} {day}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -145,6 +200,9 @@ const Dashboard: React.FC = () => {
                         <div className='icon d-flex'>
                             <img src="0685f1c668f1deb33e75.png" alt="EyeRefer" className='icon-2' />
                             <div className="card-text">{totalDoctors}</div>
+                            <div className='date-adjusted'>
+                                Last updated : {monthName} {day}
+                            </div>
                         </div>
                     </div>
                 </div>
