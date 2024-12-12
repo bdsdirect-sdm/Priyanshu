@@ -305,7 +305,7 @@ export const getPatientList = async (req: any, res: Response) => {
 export const getPatient = async (req: any, res: Response) => {
     try {
         const { patientId } = req.params;
-        console.log("qwerfewr", patientId)
+        // console.log("qwerfewr", patientId)
         const { uuid } = req.user;
         const user = await User.findByPk(uuid);
         if (user) {

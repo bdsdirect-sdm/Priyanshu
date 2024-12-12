@@ -245,6 +245,8 @@
 
 .date-adjusted {
     position: absolute;
-    padding: inherit;
-    padding: 47px 62px;
+    padding-left: 133px;
+    font-size: 14px;
+    padding-top: 51px;
+    color: #737A7D;
 }

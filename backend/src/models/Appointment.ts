@@ -44,13 +44,13 @@ Appointment.init({
     modelName: 'Appointment',
     tableName: 'appointments',
     timestamps: true,
-    underscored: true,  // Optional: use snake_case for column names
+    underscored: true,
 });
 
 Patient.hasMany(Appointment, { foreignKey: 'patientId', as: "pid" });
 Appointment.belongsTo(Patient, { foreignKey: 'patientId', as: "pid" });
 
-User.hasMany(Appointment, { foreignKey: 'createdBy', as: 'uid' });  // Example of associating an appointment to a user (who created it)
+User.hasMany(Appointment, { foreignKey: 'createdBy', as: 'uid' });
 Appointment.belongsTo(User, { foreignKey: 'createdBy', as: 'uid' });
 
 export default Appointment;

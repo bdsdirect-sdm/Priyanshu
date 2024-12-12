@@ -143,7 +143,6 @@ const Dashboard: React.FC = () => {
     // Get the day of the month
     const day = dateObj.getDate(); // 29
 
-    // Optionally, if you want the month's name (e.g., "December"), use this array
     const months = [
         'Jan', 'Feb', 'March', 'April', 'May', 'June', 'July',
         'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
@@ -172,7 +171,7 @@ const Dashboard: React.FC = () => {
 
             <div className="metrics-cards">
                 <div className="card" onClick={() => navigate('/patient')}>
-                    <div className="card-body">Referrals Placed
+                    <div className="card-body">Referrals Received
                         <div className='icon d-flex'>
                             <img src="5be148eb11e3f4de1fe4.svg" alt="EyeRefer" className='icon-2' />
                             <div className="card-text">{totalRefersReceived}</div>
@@ -196,7 +195,7 @@ const Dashboard: React.FC = () => {
                 </div>
 
                 <div className="card" onClick={() => navigate('/doctor')}>
-                    <div className="card-body">Doctor OD/MD
+                    <div className="card-body">OD/MD
                         <div className='icon d-flex'>
                             <img src="0685f1c668f1deb33e75.png" alt="EyeRefer" className='icon-2' />
                             <div className="card-text">{totalDoctors}</div>
