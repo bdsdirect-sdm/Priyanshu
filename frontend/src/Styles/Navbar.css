@@ -1,0 +1,40 @@
+.navbar {
+    background-color: #000000;
+    /* Bootstrap secondary color */
+    position: fixed;
+    width: 100vw;
+    z-index: 3;
+    padding: 10px 20px;
+}
+
+.notification-icon {
+    margin-left: 700px;
+}
+
+.navbar-brand {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.navbar-brand img {
+    margin-right: 10px;
+}
+
+.navbar .text-white p {
+    margin: 0;
+    line-height: 1.2;
+}
+
+.bi-chevron-down {
+    cursor: pointer;
+    color: black;
+}
+
+.rounded-circle {
+    object-fit: cover;
+}
+
+.dropd {
+    top: 40%;
+}

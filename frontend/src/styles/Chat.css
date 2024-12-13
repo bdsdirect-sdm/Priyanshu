@@ -1,17 +1,17 @@
 /* General Styles */
-body {
+/* body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f7f7f7;
     color: #333;
-}
+} */
 
 /* Chat Layout */
 .chat-layout {
     display: flex;
     height: calc(100vh - 70px);
-    margin-left: 250px;
+    /* margin-left: 250px; */
     /* Matches sidebar width when expanded */
     overflow: hidden;
     transition: margin-left 0.3s ease;

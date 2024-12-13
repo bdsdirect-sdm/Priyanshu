@@ -1,6 +1,6 @@
 /* General Layout for Patient View */
 .wrap-content {
-    margin-left: 250px;
+    /* margin-left: 250px; */
     /* Adjust this depending on your sidebar width */
     padding: 20px;
     border-radius: 8px;
