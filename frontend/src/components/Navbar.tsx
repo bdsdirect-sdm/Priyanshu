@@ -57,19 +57,17 @@ const Navbar: React.FC = () => {
     return (
         <nav className="navbar bg-white">
             <div className="container-fluid d-flex justify-content-between align-items-center">
-                {/* Left Section: Logo and Brand Name */}
                 <div className="navbar-brand d-flex align-items-center">
-                    <img
-                        src={`${logo}`} // Replace with your logo source
-                        alt="Logo"
-                        height="40"
-                        className="d-inline-block align-text-top"
-                    />
-                    <p className="mt-2 ms-2 text-dark fw-bold">EYE REFER</p>
+                    <Link to="/dashboard" className="d-flex align-items-center text-decoration-none">
+                        <img
+                            src={`${logo}`}
+                            alt="Logo"
+                            height="40"
+                            className="d-inline-block align-text-top"
+                        />
+                        <p className="mt-2 ms-2 text-dark fw-bold">EYE REFER</p>
+                    </Link>
                 </div>
-
-                {/* Right Section: User Info */}
-
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor"
                         className="bi bi-bell notification-icon position-relative" viewBox="0 0 16 16"
@@ -82,12 +80,10 @@ const Navbar: React.FC = () => {
                             {unreadcount}
                         </span>
                     )}
-
-
                 </div>
                 <div className="d-flex align-items-center position-relative" onClick={toggleDropdown}>
                     <img
-                        src="https://via.placeholder.com/40" // Replace with correct image source
+                        src="https://via.placeholder.com/40"
                         alt="User Profile"
                         className="rounded-circle me-2"
                         height="40"
@@ -131,8 +127,7 @@ const Navbar: React.FC = () => {
                 </div>
             </div>
         </nav>
-
     )
 }
 
-export default Navbar
+export default Navbar;

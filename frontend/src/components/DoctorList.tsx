@@ -136,8 +136,8 @@ const DoctorList: React.FC = () => {
             {sortedDoctors?.map((doctor: any, index: number) => (
               <tr key={doctor.id}>
                 <td>{doctor.firstname} {doctor.lastname}</td>
-                <td>{doctor.referralPlaced || '-'}</td>
-                <td>{doctor.referralCompleted || '-'}</td>
+                <td>{doctor.referralPlaced || '0'}</td>
+                <td>{doctor.referralCompleted || '0'}</td>
                 <td>{doctor.avgContactTime || '-'}</td>
                 <td>{doctor.avgConsultTime || '-'}</td>
                 <td>{doctor.phone}</td>

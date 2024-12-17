@@ -135,7 +135,7 @@ const Profile: React.FC = () => {
             className="profile-image"
           /><p className='name2'>{user.firstname} {user.lastname}</p>
         </div>
-        <div>
+        <div className=''>
           <button onClick={() => setIsEditing(true)}>Edit Profile</button>
         </div>
       </div>

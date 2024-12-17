@@ -256,7 +256,7 @@ const UpdatePatient: React.FC = () => {
                             </div>
 
                             <div className="form-group text-center">
-                                <button type="submit" className="btn-outline-primary">Update Patient</button>
+                                <button type="submit" className="btn-outline-primary">Submit</button>
                             </div>
                         </div>
                     </Form>

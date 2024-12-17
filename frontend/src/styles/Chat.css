@@ -39,6 +39,7 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
+    height: 80vh;
 }
 
 .search-bar {
@@ -191,7 +192,7 @@
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-left: 1px solid #ddd;
-    height: 100vh;
+    height: 80vh;
 }
 
 .chat-header {
