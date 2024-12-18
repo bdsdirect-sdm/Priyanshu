@@ -208,7 +208,7 @@ const Dashboard: React.FC = () => {
             </div>
 
             <div className='refer d-flex'>
-                {user.doctype === 2 ? (<><h2 className="refer-title">Referral Patient</h2><button className="appointment-btn" onClick={() => navigate("/add-patient")}>+Add Referral patient</button></>) : <><h2 className="refer-title">Add Appointment</h2><button className="appointment-btn" onClick={() => navigate("/add-appointment")}>+Add Appointment</button></>}
+                {user.doctype === 2 ? (<><h2 className="refer-title">Referrals Patient</h2><button className="appointment-btn" onClick={() => navigate("/add-patient")}>+Add Referral patient</button></>) : <><h2 className="refer-title">Add Appointment</h2><button className="appointment-btn" onClick={() => navigate("/add-appointment")}>+Add Appointment</button></>}
             </div>
 
             <div className="patient-list-section">

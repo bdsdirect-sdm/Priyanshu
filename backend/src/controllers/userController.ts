@@ -10,6 +10,8 @@ import bcrypt from 'bcrypt';
 import Staff from "../models/Staff";
 import Appointment from "../models/Appointment";
 import Room from "../models/Room";
+import { io } from "../socket/socket";
+import Notification from "../models/Notifications";
 
 const Security_Key: any = Local.SECRET_KEY;
 
@@ -409,7 +411,7 @@ export const addPatient = async (req: any, res: any) => {
 
             if (patient) {
                 // Send a success response
-                res.status(200).json({ "message": "Patient added successfully" });
+                res.status(200).json({ "message": "Patient added successfully", 'patient': patient });
             }
         } else {
             // If the user is not authorized
@@ -710,5 +712,38 @@ export const getRooms = async (req: any, res: Response) => {
     }
     catch (err) {
         res.status(500).json({ "message": err });
+    }
+}
+export const getNotifications = async (req: any, res: Response) => {
+    try {
+        const { uuid } = req.user;
+        const notifications = await Notification.findAll({ where: { notifyto: uuid }, order: [['createdAt', 'DESC']] });
+        if (notifications) {
+            res.status(200).json({ "notifications": notifications, "message": "Notifications Found" });
+        } else {
+            res.status(404).json({ "message": "Notifications Not Found" });
+        }
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500).json({ "message": `Something went wrong ${err}` });
+    }
+}
+export const updateNotificationStatus = async (req: any, res: Response) => {
+    try {
+        const { uuid } = req.user;
+        const notifications = await Notification.findAll({ where: { notifyto: uuid } });
+
+        if (notifications) {
+            for (let i = 0; i < notifications.length; i++) {
+                const notification = notifications[i];
+                await notification.update({ is_seen: 1 });
+            }
+
+            io.to(`room-${uuid}`).emit('getUnreadCount', 0);
+        }
+    }
+    catch (err) {
+        console.log(err);
     }
 }

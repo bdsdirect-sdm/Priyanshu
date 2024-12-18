@@ -1,45 +1,39 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../config/db";
+import { v4 as UUIDV4 } from "uuid";
+import User from "./User";
 
 class Notification extends Model {
-    public id!: number;
-    public room_id!: number;
-    // public sender_id!: number;
-    public receiver_id!: number;
-    public message!: string;
+    public uuid!: string;
+    public notification!: string;
+    public notifyby!: string;
+    public notifyto!: string;
+    public is_seen!: string;
 }
 
-Notification.init(
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-            allowNull: false,
-        },
-        room_id: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        message: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        seen: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            defaultValue: "NO",
-        },
+Notification.init({
+    uuid: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: UUIDV4
     },
-    {
-        sequelize,
-        modelName: "Notification",
+    notification: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    is_seen: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
-);
+}, {
+    sequelize,
+    modelName: "Notification",
+});
+
+User.hasMany(Notification, { foreignKey: "notifyto", as: 'notifiedto', onDelete: "CASCADE", onUpdate: "CASCADE" });
+Notification.belongsTo(User, { foreignKey: "notifyto", as: 'notifiedto', onDelete: "CASCADE", onUpdate: "CASCADE" });
+
+User.hasMany(Notification, { foreignKey: "notifyby", as: 'notifiedby', onDelete: "CASCADE", onUpdate: "CASCADE" });
+Notification.belongsTo(User, { foreignKey: "notifyby", as: 'notifiedby', onDelete: "CASCADE", onUpdate: "CASCADE" });
 
 export default Notification;
-
-// doctors.hasMany(Notification, { foreignKey: "receiver_id!" });
-// Notification.belongsTo(doctors, { foreignKey: "receiver_id!" });
-// doctors.hasMany(Notification, { foreignKey: "sender_id!" });
-// Notification.belongsTo(doctors, { foreignKey: "sender_id!" });

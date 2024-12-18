@@ -7,6 +7,8 @@ import * as Yup from 'yup';
 import api from '../api/axiosInstance';
 import { Local } from '../environment/env';
 import "../styles/EditPatient.css";
+import { FaArrowLeft } from 'react-icons/fa'; // Importing the back button icon
+
 
 const UpdatePatient: React.FC = () => {
     const navigate = useNavigate();
@@ -119,6 +121,13 @@ const UpdatePatient: React.FC = () => {
 
     return (
         <div className="add-patient-container">
+            {/* Back Button with icon */}
+            <button
+                onClick={() => navigate(-1)} // Navigates back to the previous page
+                className="back-button">
+                <FaArrowLeft size={20} /> {/* Back arrow icon */}
+                Back
+            </button>
             <h2 className="form-title">Update Patient</h2>
             <Formik
                 initialValues={{

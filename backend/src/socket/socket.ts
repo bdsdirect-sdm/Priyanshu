@@ -1,5 +1,5 @@
 import { Server } from 'socket.io'
-import { joinRoom, sendMessage } from './event'
+import { joinNotificationRoom, joinRoom, Notificationsocket, sendMessage } from './event'
 import Notification from '../models/Notifications'
 
 export let io: Server
@@ -26,20 +26,14 @@ export const setSocket = (httpServer: any) => {
             sendMessage(socket, message);
         });
 
-        socket.on("joinnotification", (data) => {
-            console.log("joined notificatison", data?.id);
-            console.log(`User ${socket.id} joined room: ${data?.id}`);
-            socket.join(data?.id);
-        });
+        socket.on('joinNotifRoom', async (user: any) => {
+            await joinNotificationRoom(socket, user);
+        })
 
-        socket.on("sendNotification", async (data) => {
-            console.log("Received data from client:", data);
-            io.to(data.room).emit("notification", { message: data.message });
-            await Notification.create({
-                message: data.message,
-                room_id: data.room,
-            });
-        });
+        socket.on('sendNotification', async (patient: any) => {
+            console.log("Sending notification", patient)
+            await Notificationsocket(socket, patient);
+        })
 
         socket.on('disconnect', () => {
             console.log('Client disconnected');

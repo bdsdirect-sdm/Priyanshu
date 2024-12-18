@@ -1,4 +1,6 @@
 interface config {
+    GET_NOTIFICATION_LIST: any;
+    NOTIFICATION_SEEN: any;
     EDIT_PATIENT: any;
     VIEW_PATIENT: any;
     staff: any;
@@ -45,5 +47,7 @@ export const Local: config = {
     VIEW_APPOINTMENT: import.meta.env.VITE_VIEW_APPOINTMENT,
     VIEW_PATIENT: import.meta.env.VITE_VIEW_PATIENT,
     staff: undefined,
-    EDIT_PATIENT: import.meta.env.VITE_EDIT_PATIENT
+    EDIT_PATIENT: import.meta.env.VITE_EDIT_PATIENT,
+    NOTIFICATION_SEEN: import.meta.env.VITE_NOTIFICATION_SEEN,
+    GET_NOTIFICATION_LIST: import.meta.env.VITE_GET_NOTIFICATION_LIST
 }

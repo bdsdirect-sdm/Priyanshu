@@ -66,3 +66,11 @@ export const sendMessage = async (socket: any, message: any) => {
         console.log(err);
     }
 }
+export const joinNotificationRoom = async (socket: any, user: any) => {
+}
+
+export const Notificationsocket = async (socket: any, patient: any) => {
+}
+
+export const sendCount = (user: any, count: any) => {
+}

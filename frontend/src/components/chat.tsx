@@ -25,7 +25,6 @@ const Chat: React.FC = () => {
         }
 
         function fetchChats() {
-
             socket.emit("joinchat", chatdata);
 
             socket.on("prev_msg", async (data: any) => {
@@ -74,7 +73,6 @@ const Chat: React.FC = () => {
         });
     }, [socket]);
 
-
     const openChat = (patient: any, doc1: any, doc2: any, user: any, pfirstname: string, plastname: string) => {
         const chatData = { patient, user1: doc1, user2: doc2, user };
         localStorage.setItem("chatdata", JSON.stringify(chatData));
@@ -85,9 +83,6 @@ const Chat: React.FC = () => {
 
         socket.emit("joinchat", chatData);
     };
-
-
-
 
     const sendMessage = async () => {
         if (newMessage.trim() === "") {
@@ -107,6 +102,12 @@ const Chat: React.FC = () => {
         }
     };
 
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    };
+
     if (isLoading) {
         return (
             <>
@@ -114,7 +115,7 @@ const Chat: React.FC = () => {
                     <div className="spinner-border spinner text-primary me-2" role="status">
                         <span className="visually-hidden">Loading...</span>
                     </div>
-                    <div className='me-2 fs-2' >Loading...</div>
+                    <div className='me-2 fs-2'>Loading...</div>
                 </div>
             </>
         )
@@ -145,13 +146,13 @@ const Chat: React.FC = () => {
                                     openChat(room?.patient?.uuid, room?.doc1?.uuid, room?.doc2?.uuid, rooms?.user?.uuid, room?.patient?.firstname, room?.patient?.lastname)
                                 }} >
                                     <h5>{room.name}</h5>
-                                    <p>{room.doc1.uuid != rooms.user.uuid && (
+                                    <p>{room.doc1.uuid !== rooms.user.uuid && (
                                         <>
                                             {room.doc1.firstname} {room.doc1.lastname}
                                         </>
                                     )}
 
-                                        {room.doc2.uuid != rooms.user.uuid && (
+                                        {room.doc2.uuid !== rooms.user.uuid && (
                                             <>
                                                 {room.doc2.firstname} {room.doc2.lastname}
                                             </>
@@ -160,11 +161,10 @@ const Chat: React.FC = () => {
                                 </div>
                             </>
                         ))}
-
                     </div>
                 </div>
 
-                {direct != 0 && (
+                {direct !== 0 && (
                     <>
                         {/* Chatbar */}
                         <div className="chat-main">
@@ -176,19 +176,22 @@ const Chat: React.FC = () => {
                             {/* Messages */}
                             <div className="chat-messages mb-5">
                                 {messages.map((msg: any, index: number) => (
-                                    <>
-                                        <div
-                                            key={index}
-                                            className={`chat-bubble ${msg.sender_id === chatdata.user
-                                                ? "chat-sent"
-                                                : "chat-received"
-                                                }`}
-                                        >
-                                            <p>{msg.message}</p>
-                                            <span className="message-timestamp"> {msg.createdAt.split("T")[0]} </span>
-                                        </div>
-                                        <br />
-                                    </>
+                                    <div
+                                        key={index}
+                                        className={`chat-bubble ${msg.sender_id === chatdata.user
+                                            ? "chat-sent"
+                                            : "chat-received"
+                                            }`}
+                                    >
+                                        <p>{msg.message}</p>
+                                        <span className="message-timestamp">
+                                            {new Date(msg.createdAt).toLocaleString('en-US', {
+                                                hour: '2-digit',
+                                                minute: '2-digit',
+                                                hour12: true
+                                            })}
+                                        </span>
+                                    </div>
                                 ))}
                             </div>
 
@@ -199,6 +202,7 @@ const Chat: React.FC = () => {
                                     className="chat-input"
                                     value={newMessage}
                                     onChange={(e) => setNewMessage(e.target.value)}
+                                    onKeyPress={handleKeyPress}
                                     placeholder="Type a message..."
                                 />
                                 <button className="chat-send-button" onClick={sendMessage}>

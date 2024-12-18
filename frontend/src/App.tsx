@@ -21,6 +21,7 @@ import AppointmentList from './components/AppointmentList';
 import ViewAppointment from './components/ViewAppointment';
 import ViewPatient from './components/Viewpatient';
 import EditPatient from './components/EditPatient';
+import NotificationsList from './components/Notification';
 
 const App: react.FC = () => {
 
@@ -43,6 +44,10 @@ const App: react.FC = () => {
         {
           path: '/dashboard',
           element: <Dashboard />
+        },
+        {
+          path: '/notification',
+          element: <NotificationsList />
         },
         {
           path: '/update-password',

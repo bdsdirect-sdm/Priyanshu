@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { registerUser, loginUser, verifyUser, getUser, getDocList, getPatientList, addPatient, addAddress, getDoctorList, updateprofile, deleteAddress, changePassword, addStaff, getStaff, addAppointment, getAppointments, getRooms, getAppointment, getPatient, updatePatient } from "../controllers/userController";
+import { registerUser, loginUser, verifyUser, getUser, getDocList, getPatientList, addPatient, addAddress, getDoctorList, updateprofile, deleteAddress, changePassword, addStaff, getStaff, addAppointment, getAppointments, getRooms, getAppointment, getPatient, updatePatient, updateNotificationStatus, getNotifications } from "../controllers/userController";
 import userAuthMiddleware from "../middlewares/userAuth";
 import signupValidation from "../middlewares/formValidation.ts/signupValidation";
 import loginValidation from "../middlewares/formValidation.ts/loginValidation";
@@ -26,5 +26,8 @@ router.post('/update-profile', userAuthMiddleware, updateprofile);
 router.post('/add-Staff', userAuthMiddleware, addStaff);
 router.post('/add-appointment', userAuthMiddleware, addAppointment);
 router.post("/change-password", userAuthMiddleware, changePassword);
+// Notification API's
+router.get('/notification-list', userAuthMiddleware, getNotifications);
+router.put('/seen-notification', userAuthMiddleware, updateNotificationStatus);
 
 export default router;

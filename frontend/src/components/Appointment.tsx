@@ -104,7 +104,7 @@ const AppointmentForm: React.FC = () => {
                     message: `Dr.  had fixed the appointment of ${response?.data?.pid?.firstname}`,
                     room: fck?.referedby?.uuid,
                 });
-
+                socket.emit('sendNotification', { 'pId': formData.patientName, 'code': 1 });
                 navigate('/appointments');
             }
         } catch (err) {
