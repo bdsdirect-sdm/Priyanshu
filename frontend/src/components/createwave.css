@@ -1,0 +1,71 @@
+.cw-clr {
+    background: #C5B084;
+    color: #B89C674D;
+}
+
+.details {
+    position: relative;
+    top: -30px;
+    left: -20px
+}
+
+.comments {
+    position: relative;
+    top: -83px;
+    margin-bottom: -60px;
+}
+
+.basic-details {
+    position: relative;
+    left: -25px
+}
+
+.main-img-div {
+    position: absolute;
+}
+
+.photo {
+    position: relative;
+    top: -40px;
+    z-index: 1;
+    /* transform: translate(0px, -40px); */
+}
+
+.snd-rel-div {
+    position: relative;
+    top: -99.5px;
+    z-index: 0;
+}
+
+.comment-btn {
+    position: relative;
+    top: -90px;
+}
+
+.wave-card {
+    background-color: #EEF5F6;
+}
+
+.wave-msg {
+    position: relative;
+    top: -65px;
+}
+
+.cmn-clr {
+    color: #BEA16E
+}
+
+.close-friend {
+    position: relative;
+    top: -35px;
+    left: 95%;
+}
+
+.btn-clr {
+    background-color: #476692
+}
+
+.modal-content {
+    text-indent: -7px;
+    word-spacing: -2px;
+}

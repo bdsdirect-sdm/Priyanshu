@@ -1,0 +1,46 @@
+.rightbar {
+    width: 47.9vw;
+}
+
+.sideimg {
+    height: 117vh;
+    margin: 0;
+    padding: 0;
+}
+
+.foot {
+    width: 120.8vw;
+}
+
+hr {
+    color: #B18D4BCC;
+    width: 7%;
+    border: 2px solid #B18D4BCC;
+}
+
+.pass:focus {
+    outline: none;
+}
+
+.lc {
+    position: absolute;
+}
+
+.Link {
+    color: #B18D4BCC;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 892px) {
+    .sideimg {
+        display: none;
+    }
+
+    .lc {
+        position: fixed;
+    }
+}
+
+.full-form {
+    background-color: #ffffff;
+}

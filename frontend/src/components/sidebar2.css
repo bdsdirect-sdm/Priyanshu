@@ -1,0 +1,22 @@
+.active-link {
+  background-color: #BEA16E;
+  border-radius: 5px;
+}
+
+.cmn-bg {
+  background-color: #3E5677;
+}
+
+.cmn-clr {
+  color: #3E5677;
+}
+
+.foot {
+
+  /* margin-top: auto; */
+  width: 100%;
+}
+
+.hh {
+  height: 83vh;
+}

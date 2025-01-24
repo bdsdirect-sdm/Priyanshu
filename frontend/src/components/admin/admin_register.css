@@ -1,0 +1,89 @@
+/* Updated CSS for Admin Register Page */
+
+body {
+    background-color: #f8f9fa;
+    /* Light background */
+    font-family: Arial, sans-serif;
+}
+
+.form-container {
+    background-color: #ffffff;
+    /* White form background */
+    width: 400px;
+    /* Match the width in the image */
+    margin: 50px auto;
+    /* Center the form */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Light shadow */
+    padding: 20px;
+    /* Add padding inside the form */
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+    /* Black text for heading */
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 14px;
+    color: #555555;
+    /* Grey labels */
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    /* Slightly rounded input fields */
+    margin-bottom: 15px;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(128, 189, 255, 0.5);
+}
+
+button {
+    background-color: #007bff;
+    /* Blue button color */
+    color: #ffffff;
+    /* White button text */
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+    /* Darker blue on hover */
+}
+
+.Link {
+    font-size: 14px;
+    color: #007bff;
+    /* Blue link color */
+    text-decoration: none;
+}
+
+.Link:hover {
+    text-decoration: underline;
+    /* Underline on hover */
+}
+
+.text-danger {
+    color: #ff0000;
+    /* Red for error messages */
+    font-size: 12px;
+}
