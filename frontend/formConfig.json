@@ -1,0 +1,100 @@
+{
+    "title": "User Registration Form",
+    "fields": [
+        {
+            "id": "fullName",
+            "label": "Full Name",
+            "type": "name",
+            "nameType": "fullName",
+            "required": true,
+            "value": "John Doe"
+        },
+        {
+            "id": "email",
+            "label": "Email",
+            "type": "email",
+            "required": true,
+            "value": "john.doe@example.com"
+        },
+        {
+            "id": "phone",
+            "label": "Phone",
+            "type": "phone",
+            "required": false,
+            "value": "1234567890"
+        },
+        {
+            "id": "country",
+            "label": "Country",
+            "type": "dropdown",
+            "required": true,
+            "options": [
+                "USA",
+                "Canada",
+                "UK"
+            ],
+            "value": "USA"
+        },
+        {
+            "id": "dob",
+            "label": "Date of Birth",
+            "type": "date",
+            "required": true,
+            "value": "1990-01-01"
+        },
+        {
+            "id": "address",
+            "label": "Address",
+            "type": "textarea",
+            "required": true,
+            "value": "123 Main St, Anytown, USA"
+        },
+        {
+            "id": "gender",
+            "label": "Gender",
+            "type": "radio",
+            "required": true,
+            "options": [
+                "Male",
+                "Female",
+                "Other"
+            ],
+            "value": "Male"
+        },
+        {
+            "id": "acceptTerms",
+            "label": "Accept Terms and Conditions",
+            "type": "checkbox",
+            "required": true,
+            "value": "true"
+        },
+        {
+            "id": "password",
+            "label": "Password",
+            "type": "password",
+            "required": true,
+            "value": "********"
+        },
+        {
+            "id": "confirmPassword",
+            "label": "Confirm Password",
+            "type": "password",
+            "required": true,
+            "value": "********"
+        },
+        {
+            "id": "website",
+            "label": "Website",
+            "type": "url",
+            "required": false,
+            "value": "https://www.example.com"
+        },
+        {
+            "id": "age",
+            "label": "Age",
+            "type": "number",
+            "required": true,
+            "value": "30"
+        }
+    ]
+}
