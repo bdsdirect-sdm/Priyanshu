@@ -57,12 +57,12 @@ export const userLogin = async (req: any, res: Response) => {
         console.log(data);
         const user = await User.findOne({ where: { email: email } });
         if (!user) {
-            res.status(401).json({ 'message': 'Invalid email' });
+            res.status(401).json({ 'message': 'Invalid credentials' });
         }
         else {
             const isValid = await bcrypt.compare(password, user.password);
             if (!isValid) {
-                res.status(401).json({ 'message': 'Wrong password' });
+                res.status(401).json({ 'message': 'Invalid credentials' });
             }
             else {
                 // const token = jwt.sign({uuid: user.uuid}, SECRET_KEY, {expiresIn: '1h'});
@@ -206,14 +206,14 @@ export const adminLogin = async (req: any, res: any) => {
         const admin = await Admin.findOne({ where: { email } });
 
         if (!admin) {
-            return res.status(401).json({ message: 'Invalid email' });
+            return res.status(401).json({ message: 'Invalid credentials' });
         }
 
         // Check if the provided password matches the hashed password stored in the database
         const isValidPassword = await bcrypt.compare(password, admin.password);
 
         if (!isValidPassword) {
-            return res.status(401).json({ message: 'Incorrect password' });
+            return res.status(401).json({ message: 'Invalid credentials' });
         }
 
         // Generate a JWT token

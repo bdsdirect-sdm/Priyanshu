@@ -1,4 +1,5 @@
 import dotenv from 'dotenv'
+import Stripe from 'stripe';
 
 dotenv.config({ path: ".env.development" });
 
@@ -15,5 +16,6 @@ export const Local: any = {
     BASE_URL: process.env.BASE_URL,
     LOGIN_URL: process.env.LOGIN_URL,
     SIGNUP_URL: process.env.SIGNUP_URL,
-    CRYPTO_SECRET_KEY: process.env.CRYPTO_SECRET_KEY
+    CRYPTO_SECRET_KEY: process.env.CRYPTO_SECRET_KEY,
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY
 };

@@ -18,17 +18,24 @@ const AdminNavbar: React.FC = () => {
         try {
             const response = await api.put(`${Local.ADMIN_LOGOUT}`, {}, {
                 headers: {
-                    'Authorization': `Bearer ${token}` // Adding "Bearer" prefix for token standard
+                    'Authorization': `Bearer ${token}`
                 }
             });
 
             toast.success(`${response.data.message}`);
+
             localStorage.clear();
+
+            document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+            document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
             navigate('/admin/login');
         } catch (err: any) {
             toast.error(`${err?.response?.data?.message || 'Logout failed. Please try again later.'}`);
         }
-    }
+    };
+
 
     return (
         <nav className="navbar bg-secondary-subtle">

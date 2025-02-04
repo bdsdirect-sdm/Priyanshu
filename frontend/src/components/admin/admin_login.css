@@ -1,0 +1,157 @@
+/* Admin Login Page Styles */
+.form-container {
+    max-width: 450px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styles */
+.form-container h1 {
+    color: #2c3e50;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.form-container hr {
+    height: 3px;
+    background: linear-gradient(to right, #3498db, #2980b9);
+    border: none;
+    margin: 1rem 0 2rem 0;
+}
+
+/* Form Elements */
+.form-label {
+    color: #34495e;
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    height: 48px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+    outline: none;
+}
+
+/* Password Field Container */
+.form-control.p-0.d-flex {
+    padding-right: 10px !important;
+    align-items: center;
+    background: #fff;
+}
+
+/* Password Field */
+.form-control.border-0 {
+    height: 46px;
+    background: transparent;
+}
+
+.form-control.border-0:focus {
+    box-shadow: none;
+}
+
+/* Eye Icon */
+.bi-eye,
+.bi-eye-slash {
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    transition: color 0.3s ease;
+}
+
+.bi-eye:hover,
+.bi-eye-slash:hover {
+    color: #34495e;
+}
+
+/* Error Messages */
+.text-danger {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
+}
+
+/* Button Styles */
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .form-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .form-container h1 {
+        font-size: 1.75rem;
+    }
+}
+
+/* Link Styles */
+.Link {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.Link:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+/* Loading State */
+button[type="submit"]:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+}
+
+/* Optional Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-container {
+    animation: fadeIn 0.5s ease-out;
+}

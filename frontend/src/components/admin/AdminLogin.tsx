@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-// import './admin_login.css'; // Add your custom styles for the login form
+import './admin_login.css';
 import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useNavigate } from 'react-router-dom';
+import { replace, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import api from '../../utils/axiosInstance'; // Adjust the path as necessary
-import Local from '../../environment/env'; // Adjust the path as necessary
-import Button from '../../common/components/CommonButton'; // Adjust the path as necessary
+import api from '../../utils/axiosInstance';
+import Local from '../../environment/env';
+import Button from '../../common/components/CommonButton';
 import { useMutation } from '@tanstack/react-query';
 
 const AdminLogin: React.FC = () => {
@@ -14,21 +14,24 @@ const AdminLogin: React.FC = () => {
     const [passType, setPassType] = useState('password');
     const [passVisible, setPassVisible] = useState(false);
 
-    // API call to log in the admin
     const loginAdmin = async (formData: any) => {
         try {
-            const response = await api.post(`${Local.LOGIN_ADMIN}`, formData); // Replace with your actual API path
+            const response = await api.post(`${Local.LOGIN_ADMIN}`, formData);
             toast.success(response.data.message);
-            localStorage.setItem("token", response.data.token); // Store token in local storage
-            localStorage.setItem("user", JSON.stringify(response.data.user)); // Store user info
-            navigate('/admin/dashboard'); // Redirect to the dashboard after successful login
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("user", JSON.stringify(response.data.user));
+
+            window.history.pushState(null, '', window.location.href);
+            window.onpopstate = () => {
+                window.history.go(1);
+            };
+
+            navigate('/admin/dashboard', { replace: true });
         } catch (err: any) {
             toast.error(`${err.response?.data?.message || "Something went wrong"}`);
-            // console.error(err);
         }
     };
 
-    // Validation schema for form inputs
     const validationSchema = Yup.object().shape({
         email: Yup.string().email("Invalid email").required("Email is required"),
         password: Yup.string().min(8, "Password must be at least 8 characters long")
@@ -43,7 +46,6 @@ const AdminLogin: React.FC = () => {
         mutationFn: loginAdmin,
     });
 
-    // Form submit handler
     const submitHandler = (values: any) => {
         loginMutation.mutate(values);
     };

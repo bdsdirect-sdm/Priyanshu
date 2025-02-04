@@ -63,10 +63,10 @@ const Signup: React.FC = () => {
     return (
         <>
             <div className='h-100'>
-                <div className='position-absolute p-4 ms-5 mt-5'>
-                    <div className='mt-5 mb-5 '>
+                <div className='position-absolute mt-5'>
+                    <div className='mt-5  '>
                         <h1 className=' text-3xl text-center position-absolute top-0 pb-0 ms-5'>Sign Up</h1>
-                        <hr className=' opacity-100 rounded ms-5 pt-0 mt-0' />
+                        <hr className=' opacity-100 rounded ms-5 ' />
                     </div>
 
                     <div className='ms-5'>

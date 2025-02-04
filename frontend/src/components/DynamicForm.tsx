@@ -247,7 +247,7 @@ const DynamicForm: React.FC = () => {
         <div>
             <h1>{formConfig.title}</h1>
             <form onSubmit={handleSubmit}>
-                {formConfig.fields.map((field, index) => renderField(field))}
+                {formConfig.fields.map((field: any, index) => renderField(field))}
                 <button type="submit">Submit</button>
             </form>
         </div>

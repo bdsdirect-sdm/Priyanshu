@@ -34,7 +34,7 @@ export const personalValidatorSchema = Yup.object().shape({
 const AdminUser: React.FC<any> = ({ userType }) => {
     const [search, setSearch] = useState('');
     const [userUUID, setUserUUID] = useState('');
-    const [activeTab, setActiveTab] = useState(2) // 1 for basic details & 2 for personal details
+    const [activeTab, setActiveTab] = useState(2)
     const [showUser, setShowUser] = useState<any>({});
     const [editUser, setEditUser] = useState<any>({});
 

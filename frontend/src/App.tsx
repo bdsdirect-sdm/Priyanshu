@@ -18,6 +18,13 @@ import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
 import NotFound from './components/NotFound'; // 404 page
 import DynamicForm from './components/DynamicForm';
+import CheckoutForm from './components/admin/CheckoutForm';
+import { Elements } from '@stripe/react-stripe-js';
+import { stripePromise } from './utils/stripe';
+import { TranslationProvider } from './components/admin/TranslationContext';
+import LanguageSwitcher from './components/admin/LanguageSwitcher';
+import Translatable from './components/admin/TranslatableComponent';
+
 
 const App: React.FC = () => {
 
@@ -26,6 +33,10 @@ const App: React.FC = () => {
     //   path: '/admin/register',
     //   element: <AdminRegister />
     // },
+    {
+      path: '/admin',
+      element: <AdminLogin />
+    },
     {
       path: '/admin/login',
       element: <AdminLogin />
@@ -37,6 +48,27 @@ const App: React.FC = () => {
     {
       path: '/admin/DynamicForm',
       element: <DynamicForm />
+    },
+    {
+      path: '/admin/checkoutform',
+      element: (
+        <Elements stripe={stripePromise}>
+          <CheckoutForm />
+        </Elements>
+      ),
+    },
+    {
+      path: '/admin/translation',
+      element: (
+        <TranslationProvider>
+          <div>
+            <LanguageSwitcher />
+            <Translatable>
+              Hello, this is a dynamic translation example
+            </Translatable>
+          </div>
+        </TranslationProvider>
+      )
     },
     {
       path: '/',

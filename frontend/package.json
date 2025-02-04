@@ -10,18 +10,25 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@paypal/react-paypal-js": "^8.8.1",
+    "@stripe/react-stripe-js": "^3.1.1",
+    "@stripe/stripe-js": "^5.6.0",
     "@tanstack/react-query": "^5.62.10",
     "@types/crypto-js": "^4.2.2",
+    "@types/paypal__paypal-js": "^1.0.2",
+    "@types/react-date-range": "^1.4.9",
     "axios": "^1.7.9",
     "crypto-js": "^4.2.0",
     "env-cmd": "^10.1.0",
     "formik": "^2.4.6",
+    "moment": "^2.30.1",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.7",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",
     "react-router-dom": "^7.1.1",
     "react-toastify": "^11.0.2",
+    "recharts": "^2.15.1",
     "yup": "^1.6.1"
   },
   "devDependencies": {

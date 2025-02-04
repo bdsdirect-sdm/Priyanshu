@@ -14,7 +14,6 @@ const Dashboard: React.FC = () => {
   const [getwave, setGetwave] = useState<any>({});
   const [getfriend, setGetfriend] = useState<any>({});
   const [show, setShow] = useState(0);
-  // const [event, setEvent] = useState(0); // 1 for add 2 for edit
 
   const validationSchema = Yup.object().shape({
     comment: Yup.string().required("comment is required"),
@@ -103,11 +102,6 @@ const Dashboard: React.FC = () => {
   const addCommentMutation = useMutation({
     mutationFn: addComment,
   })
-
-  // const updateCommentMutation = useMutation({
-  //   mutationFn: updateComment,
-  // })
-
   if (isLoading || friendloading || commentLoading) {
     return <div>Loading...</div>;
   }
@@ -121,7 +115,6 @@ const Dashboard: React.FC = () => {
   }
 
   const addCommentHandle = (values: any) => {
-    // console.log(values);
     addCommentMutation.mutate(values);
   }
 
@@ -145,13 +138,11 @@ const Dashboard: React.FC = () => {
   return (
     <>
       <div className="m-2">
-        {/* Waves */}
         <div>
           <div className="row bg-white p-4 rounded">
             <p className="h5 pb-3">Making Waves</p>
 
             {data.map((wave: any) => (
-              // Add modal calling here
               <div
                 className="col-12 col-sm-6 col-lg-4 mb-5 "
                 key={wave.uuid}
@@ -189,8 +180,6 @@ const Dashboard: React.FC = () => {
             ))}
           </div>
         </div>
-
-        {/* Friends */}
         <div className="mt-5 mb-4">
           <div className="row bg-white p-4 rounded">
             <p className="h5 pb-3">Friends</p>
@@ -599,7 +588,7 @@ const Dashboard: React.FC = () => {
 
               <div
                 className="ms-4 text-secondary me-2 overflow-auto comments "
-                style={{ maxHeight: "150px" }} // Adjust the maxHeight as needed
+                style={{ maxHeight: "150px" }}
               >
                 {comments?.map((comment: any) => (
                   (comment?.user_comment?.uuid == friends?.user?.uuid) ? (
@@ -618,11 +607,7 @@ const Dashboard: React.FC = () => {
                       <b>Jasmdfgrine : </b>wefgkweimf
                     </p>)
                 ))}
-
-
-
               </div>
-
             </div>
           </div>
         </div>

@@ -8,7 +8,6 @@ import { queryClient } from '../../main';
 const AdminWave: React.FC = () => {
     const [search, setSearch] = useState('');
     const [showWave, setShowWave] = useState<any>({});
-    // const [editWave, setEditWave] = useState<any>({});
 
     const updateWaveStatus = async (UUID: any) => {
         try {
@@ -132,10 +131,7 @@ const AdminWave: React.FC = () => {
                                             onClick={() => { setShowWave(wave); }}
                                         />
 
-                                        {/* <i className="bi bi-pen mx-3 text-[#307986] hover:cursor-pointer"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdropEditWave"
-                                    onClick={()=>{setEditWave(wave);}} /> */}
+
 
                                         <i className="bi bi-trash text-[#307986] hover:cursor-pointer" onClick={() => { deleteWave(wave.uuid) }} />
                                     </td>
